@@ -30,17 +30,19 @@ const User = new Schema({
   }
 }, { collection: 'Users' });
 
+const salt = parseInt(process.env.SALT_WORK_FACTOR) || 10;
+
 const hashPassword = function (password, cb) {
-    bcrypt.genSalt(parseInt(process.env.SALT_WORK_FACTOR), function (err, salt) {
+    bcrypt.genSalt(salt, function (err, salt) {
         if (err) return cb(err);
         bcrypt.hash(password, salt, function (err, hash) {
             if (err) return cb(err);
-            cb(null, hash);
+            cb(false, hash);
         });
     });
 };
 
-User.pre('save', function (next) {
+User.pre('validate', function (next) {
     console.log('inside Save !!');
     var user = this;
     now = new Date();

@@ -15,11 +15,13 @@ var addUser = function (req, res) {
                 var user = new User({
                     enrollment: req.body.enrollment,
                     password: req.body.password,
-                    email: req.body.email
+                    email: req.body.email,
+                    phone: req.body.phone
                 });
+                console.log(user);
                 user.save(function (err) {
                     if (err) {
-                        return res.status(500).json({success: false, msg: "Unable to create User."});
+                        return res.status(500).json({success: false, msg: "Unable to create new User."});
                     }
                     return res.status(200).json({success: true, msg: "Data inserted successfully"});
                 });

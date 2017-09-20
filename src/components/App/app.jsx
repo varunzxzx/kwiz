@@ -26,13 +26,15 @@ class ButtonAppBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: true
+      open: false
     }
   }
 
-  tDrawer = () => {
-    console.log(this.state.open);
+  tDrawer = (e) => {
     this.setState({open: !this.state.open});
+    if(e) {
+      browserHistory.push(e);
+    }
   }
 
   render() {
@@ -41,8 +43,8 @@ class ButtonAppBar extends Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="contrast" aria-label="Menu">
-              <MenuIcon onClick={this.tDrawer}/>
+            <IconButton onClick={this.tDrawer} className={classes.menuButton} color="contrast" aria-label="Menu">
+              <MenuIcon/>
               <Drawer toggleDrawer={this.tDrawer} open={this.state.open}/>
             </IconButton>
             <Typography type="title" color="inherit" className={classes.flex}>
@@ -51,6 +53,9 @@ class ButtonAppBar extends Component {
             <Button color="contrast">Login</Button>
           </Toolbar>
         </AppBar>
+        <div>
+          {this.props.children && React.cloneElement(this.props.children)}
+        </div>
       </div>
     )
   }

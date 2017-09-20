@@ -20,7 +20,7 @@ mongoose.connect(process.env.DB_URI, {useMongoClient: true})
 if (process.env.NODE_ENV !== 'production') {
     const webpackDevHelper = require('./index.dev.js')
     const logger = require('morgan')
-    console.log('DEVOLOPMENT ENVIRONMENT: Turning on WebPack Middleware...')
+    console.log('DEVELOPMENT ENVIRONMENT: Turning on WebPack Middleware...')
     app.use(logger('dev'));
     webpackDevHelper.useWebpackMiddleware(app)
 } else {

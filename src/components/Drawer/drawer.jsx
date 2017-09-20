@@ -21,18 +21,13 @@ class sDrawer extends Component {
   }
   render() {
     const classes = this.props.classes;
-    const sideList = (
-      <div>
-        <List className={classes.list}>{<div>hi</div>}</List>
-        <Divider />
-        <List className={classes.list}>{<div>hello</div>}</List>
-      </div>
-    );
     return(
 
       <Drawer open={this.props.open} onRequestClose={() => {this.props.toggleDrawer()}}>
-        <div tabIndex={0} role="button" onClick={() => {this.props.toggleDrawer()}}>
-          {sideList}
+        <div tabIndex={0} role="button">
+          <List className={classes.list} onClick={() => {this.props.toggleDrawer('dashboard')}}>{<div>Dashboard</div>}</List>
+          <Divider />
+          <List className={classes.list} onClick={() => {this.props.toggleDrawer('statistics')}}>{<div>Statistics</div>}</List>
         </div>
       </Drawer>
     )

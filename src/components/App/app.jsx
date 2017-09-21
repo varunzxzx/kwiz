@@ -26,15 +26,33 @@ class ButtonAppBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
+      component: "Dashboard",
+      raw: ""
     }
+  }
+
+  componentDidMount() {
+    this.props.location.pathname = this.props.location.pathname.slice(1);
+    let e = this.props.location.pathname;
+    if(e=="") {
+      e = "dashboard";
+    }
+    this.setState({component : e.charAt(0).toUpperCase() + e.slice(1), raw: e});
   }
 
   tDrawer = (e) => {
     this.setState({open: !this.state.open});
     if(e) {
       browserHistory.push(e);
+      this.setState({component : e.charAt(0).toUpperCase() + e.slice(1),raw: e});
     }
+  }
+
+  deleteCookie = (name) => {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    browserHistory.push('/');
+    location.reload();
   }
 
   render() {
@@ -45,12 +63,12 @@ class ButtonAppBar extends Component {
           <Toolbar>
             <IconButton onClick={this.tDrawer} className={classes.menuButton} color="contrast" aria-label="Menu">
               <MenuIcon/>
-              <Drawer toggleDrawer={this.tDrawer} open={this.state.open}/>
+              <Drawer toggleDrawer={this.tDrawer} open={this.state.open} raw={this.state.raw}/>
             </IconButton>
             <Typography type="title" color="inherit" className={classes.flex}>
-              Dashboard
+              {this.state.component}
             </Typography>
-            <Button color="contrast">Login</Button>
+            <Button onClick={() => {this.deleteCookie('token')}} color="contrast">SIGN OUT</Button>
           </Toolbar>
         </AppBar>
         <div>

@@ -5,6 +5,7 @@ import App from './components/App/app.jsx';
 import Login from './components/Login/login.jsx';
 import Statistics from './components/Statistics/statistics.jsx';
 import Dashboard from './components/Dashboard/dashboard.jsx';
+import NotFound from './components/NotFound/notfound.jsx';
 
 ReactDOM.render(
   <Router history={browserHistory}>
@@ -12,6 +13,7 @@ ReactDOM.render(
       <Route path="/" component={App} >
         <IndexRoute component={Dashboard} />
         <Route path='/statistics' component={Statistics} />
+        <Route path='*' component={NotFound} />
       </Route>
     </Route>
     {/* <Route component={Login}>

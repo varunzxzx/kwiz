@@ -3,6 +3,14 @@ body {
   padding: 0;
 }
 
+.mainList {
+  margin-top: 100px !important;
+}
+
+.listText h3 {
+  color: #3F51B5 !important;
+}
+
 .login-btn {
   display: block !important;
   margin: 10px auto 0 auto !important;

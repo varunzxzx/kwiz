@@ -37,6 +37,37 @@ class Login extends Component {
     this.setState({[e.target.name]: e.target.value});
   };
 
+  setCookie = (c_name, value, expiredays) => {
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate() + expiredays);
+    document.cookie = c_name + "=" + value + ";path=/" + ((expiredays ==null) ? "" : ";expires=" + exdate.toGMTString());
+  }
+
+  getCookie = (cname) => {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+  }
+
+  componentWillMount() {
+    let token = this.getCookie("token");
+    if(!token) {
+      console.log("some error that you shouldn't care");
+    } else {
+      this.authSuccess(token);;
+    }
+  }
+
   authSuccess = (token) => {
     const thiss = this;
     axios({
@@ -59,6 +90,7 @@ class Login extends Component {
 
   submit(e) {
     e.preventDefault();
+    const thiss = this;
     const authSuccess = this.authSuccess;
     const payload = {
         enrollment: this.state.enrollment,
@@ -75,6 +107,9 @@ class Login extends Component {
             data: JSON.stringify(payload)
         })
         .then(function (response) {
+            if(!thiss.state.remember) {
+              thiss.setCookie('token',response.data.token,1);
+            }
             authSuccess(response.data.token);
         })
         .catch(function (error) {

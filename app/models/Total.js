@@ -1,38 +1,35 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const Question = new Schema({
-  question: {
+const Total = new Schema({
+  basics: {
     type: String,
     required: true
   },
-  op1: {
+  functionOverloading: {
     type: String,
     required: true
   },
-  op2: {
+  constructorDestructor: {
     type: String,
     required: true
   },
-  op3: {
+  pointer: {
     type: String,
     required: true
   },
-  op4: {
+  array: {
     type: String,
     required: true
   },
-  crct: {
+  structures: {
     type: String,
     required: true
   },
-  type: {
+  classesInheritance: {
     type: String,
     required: true
-  },
-  code: {
-    type:String
   }
-}, { collection: 'Questions' });
+}, { collection: 'Total' });
 
-module.exports = mongoose.model('Question',Question);
+module.exports = mongoose.model('Total',Total);

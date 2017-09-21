@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import Drawer from 'material-ui/Drawer';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import InboxIcon from 'material-ui-icons/Inbox';
+import DashboardIcon from 'material-ui-icons/Dashboard';
+import TimelineIcon from 'material-ui-icons/Timeline';
+import PracticeIcon from 'material-ui-icons/code';
+import ContestIcon from 'material-ui-icons/casino';
+import LeaderboardIcon from 'material-ui-icons/stars';
+import ProfileIcon from 'material-ui-icons/accountCircle'
 import classnames from 'classnames';
 import { withStyles } from 'material-ui/styles';
 
@@ -42,17 +47,49 @@ class sDrawer extends Component {
           <List className={classes.list} onClick={() => {this.handleClick('dashboard')}}>{
             <ListItem button>
               <ListItemIcon className={this.state.active=='dashboard'?classes.listItem:classes.listIte}>
-                <InboxIcon />
+                <DashboardIcon />
               </ListItemIcon>
               <ListItemText className={this.state.active=='dashboard'?classnames('listText'):classnames('listTet')} primary="Dashboard" />
+            </ListItem>
+          }</List>
+          <List className={classes.list} onClick={() => {this.handleClick('practice')}}>{
+            <ListItem button>
+              <ListItemIcon className={this.state.active=='practice'?classes.listItem:classes.listIte}>
+                <PracticeIcon />
+              </ListItemIcon>
+              <ListItemText className={this.state.active=='practice'?classnames('listText'):classnames('listTet')} primary="Practice"/>
+            </ListItem>
+          }</List>
+          <List className={classes.list} onClick={() => {this.handleClick('contest')}}>{
+            <ListItem button>
+              <ListItemIcon className={this.state.active=='contest'?classes.listItem:classes.listIte}>
+                <ContestIcon />
+              </ListItemIcon>
+              <ListItemText className={this.state.active=='contest'?classnames('listText'):classnames('listTet')} primary="Contest"/>
             </ListItem>
           }</List>
           <List className={classes.list} onClick={() => {this.handleClick('statistics')}}>{
             <ListItem button>
               <ListItemIcon className={this.state.active=='statistics'?classes.listItem:classes.listIte}>
-                <InboxIcon />
+                <TimelineIcon />
               </ListItemIcon>
               <ListItemText className={this.state.active=='statistics'?classnames('listText'):classnames('listTet')} primary="Statistics"/>
+            </ListItem>
+          }</List>
+          <List className={classes.list} onClick={() => {this.handleClick('leaderboard')}}>{
+            <ListItem button>
+              <ListItemIcon className={this.state.active=='leaderboard'?classes.listItem:classes.listIte}>
+                <LeaderboardIcon />
+              </ListItemIcon>
+              <ListItemText className={this.state.active=='leaderboard'?classnames('listText'):classnames('listTet')} primary="Leaderboard"/>
+            </ListItem>
+          }</List>
+          <List className={classes.list} onClick={() => {this.handleClick('profile')}}>{
+            <ListItem button>
+              <ListItemIcon className={this.state.active=='profile'?classes.listItem:classes.listIte}>
+                <ProfileIcon />
+              </ListItemIcon>
+              <ListItemText className={this.state.active=='profile'?classnames('listText'):classnames('listTet')} primary="Profile"/>
             </ListItem>
           }</List>
         </div>

@@ -44,13 +44,17 @@ class ButtonAppBar extends Component {
   tDrawer = (e) => {
     this.setState({open: !this.state.open});
     if(e) {
-      browserHistory.push(e);
-      this.setState({component : e.charAt(0).toUpperCase() + e.slice(1),raw: e});
+      if(!(String(e) === "[object Object]")) {
+        browserHistory.push(e);
+        this.setState({component : String(e).charAt(0).toUpperCase() + String(e).slice(1),raw: e});
+      }
     }
   }
 
   deleteCookie = (name) => {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    localStorage.removeItem('token');
+    localStorage.removeItem('remember');
     browserHistory.push('/');
     location.reload();
   }
@@ -72,7 +76,7 @@ class ButtonAppBar extends Component {
           </Toolbar>
         </AppBar>
         <div>
-          {this.props.children && React.cloneElement(this.props.children)}
+          {this.props.children && React.cloneElement(this.props.children,{...this.props})}
         </div>
       </div>
     )

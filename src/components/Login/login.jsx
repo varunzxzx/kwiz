@@ -63,6 +63,11 @@ class Login extends Component {
     let token = this.getCookie("token");
     if(!token) {
       console.log("some error that you shouldn't care");
+      token = localStorage.getItem("token");
+      const remember = localStorage.getItem("remember") == "true"
+      if(token && remember) {
+        this.authSuccess(token);
+      }
     } else {
       this.authSuccess(token);;
     }
@@ -84,7 +89,7 @@ class Login extends Component {
         })
         .catch(function (error) {
             //thiss.setState({ tokenExpired : true, isLoading: false })
-            console.log(error);
+            console.log("error");
         });
   }
 
@@ -108,7 +113,11 @@ class Login extends Component {
         })
         .then(function (response) {
             if(!thiss.state.remember) {
+              localStorage.setItem("remember",false);
               thiss.setCookie('token',response.data.token,1);
+            } else {
+              localStorage.setItem("remember",true);
+              localStorage.setItem("token",response.data.token);
             }
             authSuccess(response.data.token);
         })

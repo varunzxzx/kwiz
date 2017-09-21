@@ -6,6 +6,10 @@ import Login from './components/Login/login.jsx';
 import Statistics from './components/Statistics/statistics.jsx';
 import Dashboard from './components/Dashboard/dashboard.jsx';
 import NotFound from './components/NotFound/notfound.jsx';
+import Practice from './components/Practice/practice.jsx';
+import Contest from './components/Contest/contest.jsx';
+import Leaderboard from './components/Leaderboard/leaderboard.jsx';
+import Profile from './components/Profile/profile.jsx';
 
 ReactDOM.render(
   <Router history={browserHistory}>
@@ -13,6 +17,10 @@ ReactDOM.render(
       <Route path="/" component={App} >
         <IndexRoute component={Dashboard} />
         <Route path='/statistics' component={Statistics} />
+        <Route path='/practice' component={Practice} />
+        <Route path='/contest' component={Contest} />
+        <Route path='/leaderboard' component={Leaderboard} />
+        <Route path='/profile' component={Profile} />
         <Route path='*' component={NotFound} />
       </Route>
     </Route>

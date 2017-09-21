@@ -4,11 +4,16 @@ body {
 }
 
 .mainList {
-  margin-top: 100px !important;
+  margin-top: 20% !important;
 }
 
 .listText h3 {
   color: #3F51B5 !important;
+  font-weight: 700 !important;
+}
+
+.listTet h3 {
+  font-weight: 700 !important;
 }
 
 .login-btn {

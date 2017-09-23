@@ -76,20 +76,6 @@ const Stats = new Schema({
       default: "20"
     }
   },
-  structures: {
-    score: {
-      type: String,
-      default: "0"
-    },
-    skip: {
-      type: String,
-      default: "0"
-    },
-    limit: {
-      type: String,
-      default: "20"
-    }
-  },
   classesInheritance: {
     score: {
       type: String,
@@ -103,7 +89,21 @@ const Stats = new Schema({
       type: String,
       default: "20"
     }
-  }
+  },
+  polymorphism: {
+    score: {
+      type: String,
+      default: "0"
+    },
+    skip: {
+      type: String,
+      default: "0"
+    },
+    limit: {
+      type: String,
+      default: "20"
+    }
+  },
 }, { collection: 'Stats' });
 
 module.exports = mongoose.model('Stats',Stats);

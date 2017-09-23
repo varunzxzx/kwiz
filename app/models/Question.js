@@ -31,7 +31,8 @@ const Question = new Schema({
     required: true
   },
   code: {
-    type:String
+    type:String,
+    required: true
   }
 }, { collection: 'Questions' });
 

@@ -22,11 +22,11 @@ const Total = new Schema({
     type: String,
     required: true
   },
-  structures: {
+  classesInheritance: {
     type: String,
     required: true
   },
-  classesInheritance: {
+  polymorphism: {
     type: String,
     required: true
   }

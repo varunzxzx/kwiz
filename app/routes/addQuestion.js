@@ -5,7 +5,7 @@ var addQuestion = (req,res) => {
   if (!req.body.question || !req.body.op1 || !req.body.op2 || !req.body.op3 || !req.body.op4 || !req.body.crct || !req.body.type) {
     return res.status(400).json({success: false,msg: "Insufficient details"})
   } else {
-    Question.find({"question": req.body.question}, function (err, questions) {
+    Question.find({"op1": req.body.op1}, function (err, questions) {
         if (err) return res.status(400).json({success: false, msg: "Invalid detail"});
         if (questions.length != 0)
             return res.status(400).json({success: false, msg: "Invalid Credentials."});
@@ -17,7 +17,8 @@ var addQuestion = (req,res) => {
                 op3: req.body.op3,
                 op4: req.body.op4,
                 crct: req.body.crct,
-                type: req.body.type
+                type: req.body.type,
+                code: req.body.code
             });
             question.save(function (err) {
                 if (err)

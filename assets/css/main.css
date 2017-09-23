@@ -1,6 +1,38 @@
+html {
+  height: 100%;
+}
 body {
   margin: 0;
   padding: 0;
+}
+
+.selecte h3{
+  font-family: 'Source Sans Pro' !important;
+  font-weight: 400 !important;
+}
+
+.selected {
+  background: #757575 !important;
+  transition: 0.5s all ease-in-out !important;
+}
+
+.selected h3 {
+  font-family: 'Source Sans Pro' !important;
+  font-weight: 700 !important;
+}
+
+.selected * {
+  color: white !important;
+}
+
+.main-container {
+  background: #E8EAF6;
+  min-height: 574px;
+}
+
+.practice div {
+  display: flex;
+  flex-direction: column !important;
 }
 
 .mainList {
@@ -20,6 +52,7 @@ body {
   display: block !important;
   margin: 10px auto 0 auto !important;
   width: 60% !important;
+  max-width: 200px;
 }
 
 .remember {
@@ -31,6 +64,12 @@ body {
 @media only screen and (max-width: 768px) {
   .remember {
     left: 18%;
+  }
+  .main-login {
+    min-height: 526px !important;
+  }
+  .main-container {
+    min-height: 510px;
   }
 }
 
@@ -94,6 +133,7 @@ body {
   height: 100%;
   display: flex;
   color: white;
+  min-height: 574px;
 }
 
 .welcome {

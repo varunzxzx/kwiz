@@ -8,6 +8,7 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import { withStyles } from 'material-ui/styles';
 import Drawer from '../Drawer/drawer.jsx';
+import classnames from 'classnames';
 
 const styles = theme => ({
   root: {
@@ -75,7 +76,7 @@ class ButtonAppBar extends Component {
             <Button onClick={() => {this.deleteCookie('token')}} color="contrast">SIGN OUT</Button>
           </Toolbar>
         </AppBar>
-        <div>
+        <div className={classnames('main-container')}>
           {this.props.children && React.cloneElement(this.props.children,{...this.props})}
         </div>
       </div>

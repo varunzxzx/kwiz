@@ -45,7 +45,7 @@ class Topics extends Component {
   render() {
     const classes = this.props.classes;
     return(
-      <div>
+      <div className={classnames('topics')}>
         <Card className={classes.card}>
           <CardContent>
             <div className={classes.root}>

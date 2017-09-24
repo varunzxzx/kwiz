@@ -41,7 +41,7 @@ class sDrawer extends Component {
     const classes = this.props.classes;
     return(
       <Drawer open={this.props.open} width={250} onRequestClose={() => {this.props.toggleDrawer()}}>
-        <div>KWIZ</div>
+        <div className={classnames('logo')}><img src="uploads/logo.PNG" alt="KWIZ logo" title="KWIZ logo"/>  <span>KWIZ</span></div>
         <div tabIndex={0} role="button" className="mainList">
           <Divider />
           <List className={classes.list} onClick={() => {this.handleClick('dashboard')}}>{
@@ -94,6 +94,7 @@ class sDrawer extends Component {
           }</List>
         </div>
         <Divider />
+        <div className="footer">Designed & Developed By <div><a href="http://www.mvarun.me" target="_blank">Varun</a></div></div>
       </Drawer>
     )
   }

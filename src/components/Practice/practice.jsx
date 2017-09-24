@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import Topics from './Topics/topics.jsx';
+import Quiz from '../Quiz/quiz.jsx';
 import axios from 'axios';
 import classnames from 'classnames';
+import { CircularProgress } from 'material-ui/Progress';
 
 class Practice extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questions: []
+      questions: [],
+      loading: false
     }
   }
 
@@ -30,7 +33,12 @@ class Practice extends Component {
     this.getQuestions(str);
   }
 
+  componentDidMount() {
+    this.getQuestions('basics');
+  }
+
   getQuestions = (str) => {
+    this.setState({loading: true})
     const thiss = this;
     axios({
         method: 'GET',
@@ -43,11 +51,11 @@ class Practice extends Component {
             mode: 'cors'
         })
         .then(function (response) {
-          thiss.setState({questions: response.data});
-          console.log(response.data);
+          thiss.setState({questions: response.data,loading: false});
         })
         .catch(function (error) {
             //thiss.setState({ tokenExpired : true, isLoading: false })
+            thiss.setState({loading: false});
             console.log("error");
         });
   }
@@ -55,7 +63,9 @@ class Practice extends Component {
   render() {
     return(
       <div className={classnames('practice')}>
-        <Topics submit={this.handleSubmit}/>
+        {this.state.loading && <div><div className={classnames('loading m')}><CircularProgress size={80} /></div></div>}
+        {/*!this.state.loading && this.state.questions.length == 0 && <Topics submit={this.handleSubmit} />*/}
+        {this.state.questions.length != 0 && <Quiz questions={this.state.questions} />}
       </div>
     )
   }

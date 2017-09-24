@@ -9,6 +9,7 @@ import { FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
 import Button from 'material-ui/Button';
 import axios from 'axios';
+import { CircularProgress } from 'material-ui/Progress';
 
 class Login extends Component {
   constructor(props){
@@ -21,7 +22,8 @@ class Login extends Component {
       password: "",
       cpassword: "",
       loginStatus: false,
-      token: ""
+      token: "",
+      loading: false
     }
   }
 
@@ -62,14 +64,18 @@ class Login extends Component {
   componentWillMount() {
     let token = this.getCookie("token");
     if(!token) {
+      this.setState({loading: true});
       console.log("some error that you shouldn't care");
       token = localStorage.getItem("token");
       const remember = localStorage.getItem("remember") == "true"
       if(token && remember) {
         this.authSuccess(token);
+      } else {
+        this.setState({loading: false});
       }
     } else {
-      this.authSuccess(token);;
+      this.setState({loading: true});
+      this.authSuccess(token);
     }
   }
 
@@ -85,16 +91,18 @@ class Login extends Component {
             mode: 'cors'
         })
         .then(function (response) {
-          thiss.setState({data: response.data, loginStatus: true, token: token});
+          thiss.setState({data: response.data, loginStatus: true, token: token,loading: false});
         })
         .catch(function (error) {
             //thiss.setState({ tokenExpired : true, isLoading: false })
+            thiss.setState({loading: false});
             console.log("error");
         });
   }
 
   submit(e) {
     e.preventDefault();
+    this.setState({loading: true});
     const thiss = this;
     const authSuccess = this.authSuccess;
     const payload = {
@@ -132,6 +140,8 @@ class Login extends Component {
     } else {
       return(
         <div className="main-login">
+        {this.state.loading && <div className={classnames('loading')}><CircularProgress size={80} /></div>}
+        {!this.state.loading &&
           <div className="welcome">
             <img src="uploads/logo.PNG" alt="KWIZ logo" title="KWIZ logo"></img>
             <p>WELCOME TO</p>
@@ -224,6 +234,7 @@ class Login extends Component {
               </SwipeableViews>
             </div>
           </div>
+        }
         </div>
       )
     }

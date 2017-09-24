@@ -3,9 +3,11 @@ import { browserHistory } from 'react-router';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
+import NotificationIcon from 'material-ui-icons/Notifications';
+import PowerIcon from 'material-ui-icons/PowerSettingsNew';
+import Badge from 'material-ui/Badge';
 import { withStyles } from 'material-ui/styles';
 import Drawer from '../Drawer/drawer.jsx';
 import classnames from 'classnames';
@@ -56,7 +58,7 @@ class ButtonAppBar extends Component {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     localStorage.removeItem('token');
     localStorage.removeItem('remember');
-    browserHistory.push('/');
+    this.tDrawer('dashboard');
     location.reload();
   }
 
@@ -73,7 +75,10 @@ class ButtonAppBar extends Component {
             <Typography type="title" color="inherit" className={classes.flex}>
               {this.state.component}
             </Typography>
-            <Button onClick={() => {this.deleteCookie('token')}} color="contrast">SIGN OUT</Button>
+            <IconButton color="contrast">
+              <Badge color="accent" badgeContent={3} className={classnames('badge')}><NotificationIcon/></Badge>
+            </IconButton>
+            <IconButton onClick={() => {this.deleteCookie('token')}} color="contrast"><PowerIcon/></IconButton>
           </Toolbar>
         </AppBar>
         <div className={classnames('main-container')}>

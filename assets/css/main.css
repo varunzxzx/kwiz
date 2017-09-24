@@ -1,9 +1,138 @@
 html {
   height: 100%;
 }
+
 body {
   margin: 0;
   padding: 0;
+}
+
+#nextbtn {
+  position: absolute;
+  top: 300px;
+  background: #64B5F6;
+}
+
+#nextbtn svg {
+  width: 68px !important;
+  height: 60px !important;
+}
+
+.op1 {
+  background: #EF9A9A;
+}
+
+.op2 {
+  background: #80CBC4;
+}
+
+.op3 {
+  background: #E6EE9C;
+}
+
+.op4 {
+  background: #BCAAA4;
+}
+
+.op1, .op2, .op3, .op4 {
+  box-sizing: border-box;
+  font-family: 'Dosis';
+  font-size: 1.3em;
+  display: inline-block;
+  width: 48%;
+  padding: 1%;
+  padding-bottom: 5%;
+  margin: 4% 0 0 1%;
+  min-height: 50px;
+}
+
+@media only screen and (max-width: 768px) {
+  .op1, .op2, .op3, .op4 {
+    width: 100%;
+  }
+}
+
+.question-card .ques {
+  font-size: 1.6em;
+  font-family: 'Source Sans Pro';
+}
+
+.question-card > div:nth-of-type(1) {
+  height: 60% !important;
+}
+
+.question-card {
+  width: 70%;
+  background: #64B5F6;
+  margin: 100px auto 0 auto !important;
+  box-shadow: 0 4px 3px rgba(0,0,0,0.6), 0 8px 13px rgba(0,0,0,0.3), 0 18px 23px rgba(0,0,0,0.2)
+}
+
+.practice div.quiz {
+  display: block !important;
+  flex-direction: row !important;
+  width: 100%;
+}
+
+.footer {
+  text-align: center;
+  font-family: 'Dosis';
+  position: relative;
+  top: 4px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.footer div {
+  text-decoration: underline;
+}
+
+.logo img {
+  width: 80px;
+}
+ .logo {
+   text-align: center;
+   font-family: 'Princess Sofia', cursive;
+   font-size: 2em;
+   position: relative;
+   top: 20px;
+   right: 10px;
+ }
+
+ .logo span {
+   position: relative;
+   top: 5px;
+ }
+
+.MuiButtonBase-root-57.MuiIconButton-root-48.MuiIconButton-colorContrast-50 {
+  outline: none !important;
+}
+
+.loading div{
+  color: white !important;
+}
+
+.loading.m div {
+  color: #3F51B5 !important;
+  margin-top: 200% !important;
+}
+
+.loading {
+  margin: auto !important;
+}
+
+.badge span {
+  width: 18px !important;
+  height: 17px !important;
+  top: -7px !important;
+  right: -3px !important;
+  font-size: 13px !important;
+  background: #212529 !important;
+}
+
+@media only screen and (min-width: 768px) {
+  .badge {
+    margin-right: 18px;
+  }
 }
 
 .selecte h3{
@@ -28,15 +157,16 @@ body {
 .main-container {
   background: #E8EAF6;
   min-height: 574px;
+  overflow: auto;
 }
 
-.practice div {
+.practice div.topics {
   display: flex;
   flex-direction: column !important;
 }
 
 .mainList {
-  margin-top: 20% !important;
+  margin-top: 15% !important;
 }
 
 .listText h3 {

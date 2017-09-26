@@ -52,6 +52,11 @@ class Quiz extends Component {
     let arr = this.state.active.slice();
     arr[index] = n;
     this.setState({active : arr});
+    if(this.state.value<this.state.questions.length-2) {
+      setTimeout(() => {
+        this.setState({value: this.state.value + 1})
+      },500);
+    }
   }
 
   handleSubmit = () => {
@@ -121,7 +126,7 @@ class Quiz extends Component {
         <SwipeableViews  index={this.state.value} enableMouseEvents className={classnames('question-card')}>
             {this.state.questions.map((value, index) => {
               return(
-                <div key={value.op1} style={Object.assign({}, styles.slide)}>
+                <div key={index} style={Object.assign({}, styles.slide)}>
                   <div className="ques">
                     {`Q${index+1}.\u00A0\u00A0${value.question}`}
                   </div>

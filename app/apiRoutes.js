@@ -6,6 +6,7 @@ const addUser = require('./routes/addUser.js');
 const authenticate = require('./routes/authenticate.js');
 const getUser = require('./routes/getUser.js');
 const addQuestion = require('./routes/addQuestion.js');
+const submitAnswer = require('./routes/submitAnswer.js');
 
 router.use(function (req, res, next) {
     try {
@@ -47,5 +48,6 @@ router.post('/addUser',addUser);
 router.get('/getQuestion',getQuestion);
 router.get('/getUser',getUser);
 router.post('/addQuestion',addQuestion);
+router.post('/submitAnswer',submitAnswer);
 
 module.exports = router;

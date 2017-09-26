@@ -10,7 +10,8 @@ class Practice extends Component {
     super(props);
     this.state = {
       questions: [],
-      loading: false
+      loading: false,
+      type: ""
     }
   }
 
@@ -30,15 +31,33 @@ class Practice extends Component {
         }
       }
     });
+    this.setState({type: str});
     this.getQuestions(str);
   }
 
   handleAnswers = (answers) => {
-    console.log(answers);
-  }
+    console.log(this.props.token);
+    const payload = {
+        answers: answers,
+        type: this.state.type,
+        token: this.props.token
+    };
 
-  componentDidMount() {
-    this.getQuestions('basics');
+    axios({
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+            url: '/api/submitAnswer',
+            mode: 'cors',
+            data: JSON.stringify(payload)
+        })
+        .then(function (response) {
+            console.log(response.data)
+        })
+        .catch(function (error) {
+            console.log("error");
+        });
   }
 
   getQuestions = (str) => {
@@ -68,7 +87,7 @@ class Practice extends Component {
     return(
       <div className={classnames('practice')}>
         {this.state.loading && <div><div className={classnames('loading m')}><CircularProgress size={80} /></div></div>}
-        {false && !this.state.loading && this.state.questions.length == 0 && <Topics submit={this.handleSubmit} />}
+        {!this.state.loading && this.state.questions.length == 0 && <Topics submit={this.handleSubmit} />}
         {this.state.questions.length != 0 && <Quiz questions={this.state.questions} handleAnswers={this.handleAnswers} />}
       </div>
     )

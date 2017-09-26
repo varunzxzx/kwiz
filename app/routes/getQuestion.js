@@ -8,12 +8,13 @@ const getQuestion = (req, res) => {
     if(err) res.status(400).json({success: false,msg: "Not found!"});
     var skip = parseInt(stats[type].skip);
     var limit = parseInt(stats[type].limit);
-    Question.find({type: req.type}).skip(skip).limit(limit).exec((err,question) => {
+    Question.find({type: req.type}).skip(skip).limit(limit).select('question op1 op2 op3 op4').exec((err,question) => {
       if(err) {
         console.log("error");
-        res.json({success: false,msg: "Not found!"})
+        res.status(401).json({success: false,msg: "Not found!"})
+      } else {
+        res.status(200).json(question);
       }
-      res.status(200).json(question);
     });
   });
 };

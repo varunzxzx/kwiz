@@ -53,7 +53,7 @@ class Topics extends Component {
                 <Typography type="body2" gutterBottom>
                   Choose a topic
                 </Typography>
-                {["Basics","Classes & Inheritance","Function Overloading","Constructor & Destructor","Pointers","Arrays","Polymorphism"].map(value => {
+                {["Basics","Classes & Inheritance","Function Overloading","Constructor & Destructor","Pointer","Array","Polymorphism"].map(value => {
                   return(
                     <ListItem className={this.state.selected == value?classnames('selected'):classnames('selecte')} key={value} button onClick={() => {this.handleSelected(value)}}>
                       <ListItemText primary={value} />

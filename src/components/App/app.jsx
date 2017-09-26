@@ -58,7 +58,7 @@ class ButtonAppBar extends Component {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     localStorage.removeItem('token');
     localStorage.removeItem('remember');
-    this.tDrawer('dashboard');
+    browserHistory.push('/');
     location.reload();
   }
 

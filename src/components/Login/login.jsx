@@ -130,6 +130,7 @@ class Login extends Component {
             authSuccess(response.data.token);
         })
         .catch(function (error) {
+            thiss.setState({loading: false});
             console.log("error");
         });
   }

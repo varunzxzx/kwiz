@@ -33,6 +33,10 @@ class Practice extends Component {
     this.getQuestions(str);
   }
 
+  handleAnswers = (answers) => {
+    console.log(answers);
+  }
+
   componentDidMount() {
     this.getQuestions('basics');
   }
@@ -64,8 +68,8 @@ class Practice extends Component {
     return(
       <div className={classnames('practice')}>
         {this.state.loading && <div><div className={classnames('loading m')}><CircularProgress size={80} /></div></div>}
-        {/*!this.state.loading && this.state.questions.length == 0 && <Topics submit={this.handleSubmit} />*/}
-        {this.state.questions.length != 0 && <Quiz questions={this.state.questions} />}
+        {false && !this.state.loading && this.state.questions.length == 0 && <Topics submit={this.handleSubmit} />}
+        {this.state.questions.length != 0 && <Quiz questions={this.state.questions} handleAnswers={this.handleAnswers} />}
       </div>
     )
   }

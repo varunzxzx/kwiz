@@ -14,7 +14,6 @@ body {
 }
 
 #timer {
-  width: 25%;
   margin: 20px auto 0 auto;
   text-align: center;
   font-family: 'digital-clock-font';
@@ -35,7 +34,8 @@ body {
 #select {
   float: left;
   background: #FFA726;
-  padding: 5px !important;
+  padding-left: 5px !important;
+  padding-top: 5px !important;
   font-size: 1.3em !important;
 }
 
@@ -57,10 +57,12 @@ body {
 .quizbtn > button {
   float: right;
   margin: 10px;
+  margin-top: 0;
   color: black !important;
   font-size: 1.1em;
   font-family: 'Source Sans Pro';
   font-weight: 700;
+  height: 58px !important;
 }
 
 .quizbtn > button:nth-of-type(1) {

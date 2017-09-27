@@ -52,7 +52,7 @@ class Quiz extends Component {
     let arr = this.state.active.slice();
     arr[index] = n;
     this.setState({active : arr});
-    if(this.state.value<this.state.questions.length-2) {
+    if(this.state.value<this.state.questions.length-1) {
       setTimeout(() => {
         this.setState({value: this.state.value + 1})
       },500);

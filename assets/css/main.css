@@ -8,6 +8,22 @@ body {
   background: #E8EAF6;
 }
 
+#dash {
+  margin-top: 20px;
+}
+
+#notfound {
+  height: 100%;
+  text-align: center;
+  margin-top: 15%;
+}
+
+#notfound svg {
+  width: 78px !important;
+  height: 70px !important;
+  color: #6A6B71 !important;
+}
+
 #code {
   background: #E8EAF6;
   border-radius: 5px;

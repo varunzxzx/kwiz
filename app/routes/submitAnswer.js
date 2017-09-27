@@ -17,11 +17,14 @@ var submitAnswer = (req,res) => {
           res.status(401).json({success: false,msg: "Not found!"})
         } else {
           let score = 0;
+          let total = parseInt(stats.total);
           for (i=0; i<req.body.answers.length; i++) {
             if(req.body.answers[i] == question[i].crct) {
               score += 1;
             }
           }
+          total += score;
+          stats.total = String(total);
           var i;
           var newScores = [];
           for(i=0;i<=3;i++) {

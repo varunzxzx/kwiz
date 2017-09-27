@@ -7,6 +7,10 @@ const User = new Schema({
       type: String,
       required: true
   },
+  name: {
+    type: String,
+    required: true
+  },
   email: {
       type: String,
       required: true
@@ -14,6 +18,9 @@ const User = new Schema({
   phone: {
     type: String,
     required: true
+  },
+  reset_token: {
+    type: String
   },
   password: {
       type: String,
@@ -31,8 +38,7 @@ const User = new Schema({
 }, { collection: 'Users' });
 
 const salt = parseInt(process.env.SALT_WORK_FACTOR) || 10;
-
-const hashPassword = function (password, cb) {
+User.statics.hashPassword = function (password, cb) {
     bcrypt.genSalt(salt, function (err, salt) {
         if (err) return cb(err);
         bcrypt.hash(password, salt, function (err, hash) {
@@ -50,8 +56,12 @@ User.pre('validate', function (next) {
     if (!user.created_at) {
         user.created_at = now;
     }
-    if (!user.isModified('password')) return next();
+    if (!user.isModified('password')) {
+      console.log("inside password");
+      return next();
+    }
     hashPassword(user.password, function (err, hash) {
+      console.log("inside hash")
         if (err) return next(err);
         user.password = hash;
         next();
@@ -59,6 +69,7 @@ User.pre('validate', function (next) {
 });
 
 User.pre('findOneAndUpdate', function (next) {
+  console.log('findOneAndUpdate !!');
     this.findOneAndUpdate({}, {$set: {updated_at: new Date()}});
     next();
 });

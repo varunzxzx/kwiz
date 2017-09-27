@@ -7,6 +7,8 @@ const authenticate = require('./routes/authenticate.js');
 const getUser = require('./routes/getUser.js');
 const addQuestion = require('./routes/addQuestion.js');
 const submitAnswer = require('./routes/submitAnswer.js');
+const register = require('./routes/register.js');
+const authregister = require('./routes/authregister.js');
 
 router.use(function (req, res, next) {
     try {
@@ -17,7 +19,7 @@ router.use(function (req, res, next) {
     next();
 });
 
-router.use(/\/((?!(addUser)|(authenticate)|(addQuestion)).)*/, function (req, res, next) {
+router.use(/\/((?!(addUser)|(authenticate)|(addQuestion)|(register)|(authregister)).)*/, function (req, res, next) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'] || null;
     if (token) {
         jwt.verify(token, process.env.TOKEN_KEY, function (err, decoded) {
@@ -51,5 +53,7 @@ router.get('/getQuestion',getQuestion);
 router.get('/getUser',getUser);
 router.post('/addQuestion',addQuestion);
 router.post('/submitAnswer',submitAnswer);
+router.post('/register',register);
+router.post('/authregister',authregister);
 
 module.exports = router;

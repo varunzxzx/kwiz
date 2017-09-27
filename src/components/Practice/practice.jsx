@@ -9,6 +9,7 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import ReplayIcon from 'material-ui-icons/Replay';
 import ArrowIcon from 'material-ui-icons/arrowBack';
+import { browserHistory } from 'react-router';
 
 class Practice extends Component {
   constructor(props) {
@@ -102,7 +103,7 @@ class Practice extends Component {
       <div className={classnames('practice')}>
         {this.state.loading && <div><div className={classnames('loading m')}><CircularProgress size={80} /></div></div>}
         {!this.state.loading && this.state.result == "irf" && this.state.questions.length == 0 && <Topics submit={this.handleSubmit} />}
-        {this.state.questions.length != 0 && <Quiz questions={this.state.questions} handleAnswers={this.handleAnswers} />}
+        {!this.state.loading && this.state.questions.length != 0 && <Quiz questions={this.state.questions} handleAnswers={this.handleAnswers} />}
         {!this.state.loading && this.state.result != "irf" && <div>
           <Card className={classnames('score-card')} raised>
             <CardContent>
@@ -113,10 +114,10 @@ class Practice extends Component {
               <Typography type="display3" gutterBottom>
                 {`${this.state.result * 10} / ${this.state.total}`}
               </Typography>
-              <Button raised color="primary">
+              <Button raised color="primary" onClick={() => {location.reload()}}>
               <ReplayIcon/>&nbsp;&nbsp;Play Again
               </Button>
-              <Button raised color="accent">
+              <Button raised color="accent" onClick={() => {browserHistory.push('/')}}>
                 <ArrowIcon/>&nbsp;&nbsp;Go Back
               </Button>
             </CardContent>

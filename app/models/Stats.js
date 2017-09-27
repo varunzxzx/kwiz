@@ -6,6 +6,10 @@ const Stats = new Schema({
     type: String,
     required: true
   },
+  total: {
+    type: String,
+    default: "0"
+  },
   basics: {
     score: [String],
     skip: {

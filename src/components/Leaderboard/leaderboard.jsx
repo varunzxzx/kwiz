@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import NotFoundIcon from 'material-ui-icons/roomService';
+import Typography from 'material-ui/Typography';
 
 class Leaderboard extends Component {
   render() {
     return(
-      <h1>Leaderboard</h1>
+      <div id="notfound">
+        <NotFoundIcon/>
+        <Typography type="display3" gutterBottom>
+          Coming Soon...
+        </Typography>
+      </div>
     )
   }
 }

@@ -4,14 +4,21 @@ import Quiz from '../Quiz/quiz.jsx';
 import axios from 'axios';
 import classnames from 'classnames';
 import { CircularProgress } from 'material-ui/Progress';
+import Card, { CardContent } from 'material-ui/Card';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
+import ReplayIcon from 'material-ui-icons/Replay';
+import ArrowIcon from 'material-ui-icons/arrowBack';
 
 class Practice extends Component {
   constructor(props) {
     super(props);
     this.state = {
       questions: [],
+      total: 0,
       loading: false,
-      type: ""
+      type: "",
+      result: "irf"
     }
   }
 
@@ -36,12 +43,15 @@ class Practice extends Component {
   }
 
   handleAnswers = (answers) => {
-    console.log(this.props.token);
+    this.setState({loading: true});
     const payload = {
         answers: answers,
         type: this.state.type,
-        token: this.props.token
+        token: this.props.token,
+        limit: 20
     };
+
+    const thiss = this;
 
     axios({
         method: 'POST',
@@ -53,10 +63,12 @@ class Practice extends Component {
             data: JSON.stringify(payload)
         })
         .then(function (response) {
-            console.log(response.data)
+          console.log(response.data);
+            thiss.setState({result: response.data, questions: [],loading: false});
         })
         .catch(function (error) {
             console.log("error");
+            this.setState({loading: false});
         });
   }
 
@@ -68,13 +80,15 @@ class Practice extends Component {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'x-access-token': this.props.token,
-            'x-access-type': str
+            'x-access-type': str,
+            'x-access-limit': 20
         },
             url: '/api/getQuestion',
             mode: 'cors'
         })
         .then(function (response) {
-          thiss.setState({questions: response.data,loading: false});
+          console.log(response.data);
+          thiss.setState({questions: response.data,loading: false, total: response.data.length * 10});
         })
         .catch(function (error) {
             //thiss.setState({ tokenExpired : true, isLoading: false })
@@ -87,8 +101,27 @@ class Practice extends Component {
     return(
       <div className={classnames('practice')}>
         {this.state.loading && <div><div className={classnames('loading m')}><CircularProgress size={80} /></div></div>}
-        {!this.state.loading && this.state.questions.length == 0 && <Topics submit={this.handleSubmit} />}
+        {!this.state.loading && this.state.result == "irf" && this.state.questions.length == 0 && <Topics submit={this.handleSubmit} />}
         {this.state.questions.length != 0 && <Quiz questions={this.state.questions} handleAnswers={this.handleAnswers} />}
+        {!this.state.loading && this.state.result != "irf" && <div>
+          <Card className={classnames('score-card')} raised>
+            <CardContent>
+              <img src="/uploads/ribbons.png" alt="trophy" width={200}/>
+              <Typography type="display1" gutterBottom>
+                You scored
+              </Typography>
+              <Typography type="display3" gutterBottom>
+                {`${this.state.result * 10} / ${this.state.total}`}
+              </Typography>
+              <Button raised color="primary">
+              <ReplayIcon/>&nbsp;&nbsp;Play Again
+              </Button>
+              <Button raised color="accent">
+                <ArrowIcon/>&nbsp;&nbsp;Go Back
+              </Button>
+            </CardContent>
+          </Card>
+        </div>}
       </div>
     )
   }

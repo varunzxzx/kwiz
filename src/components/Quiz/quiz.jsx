@@ -130,6 +130,15 @@ class Quiz extends Component {
                   <div className="ques">
                     {`Q${index+1}.\u00A0\u00A0${value.question}`}
                   </div>
+                  {value.code == "n"?null:
+                    (<div id="code">
+                      <div>{value.code.split(/[\r\n]+/g).map(value => {
+                        return(
+                          <span>{value}<br/></span>
+                        )
+                      })}</div>
+                    </div>)
+                  }
                     <div id="set1" className={classnames('row')}>
                       <Button onClick={() => {this.handleOption(index,1)}} className={this.state.active[index] == 1? classnames('op1 col-md-5 col-xs-11 selected-option'):classnames('op1 col-md-5 col-xs-11')}>
                           {`A.\u00A0\u00A0\u00A0${value.op1}`}

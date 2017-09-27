@@ -7,10 +7,10 @@ var submitAnswer = (req,res) => {
     return res.status(400).json({success: false, msg: "Empty data"})
   } else {
     var type = req.body.type;
+    var limit = req.body.limit;
     Stats.findOne({enrollment: req.decoded.enrollment},(err,stats) => {
       if(err) res.status(400).json({success: false,msg: "Not found!"});
       var skip = parseInt(stats[type].skip);
-      var limit = parseInt(stats[type].limit);
       Question.find({type: req.body.type}).skip(skip).limit(limit).select('crct').exec((err,question) => {
         if(err) {
           console.log("error");
@@ -22,6 +22,15 @@ var submitAnswer = (req,res) => {
               score += 1;
             }
           }
+          var i;
+          var newScores = [];
+          for(i=0;i<=3;i++) {
+            newScores[i] = stats[type].score[i+1]?stats[type].score[i+1]:"0";
+          }
+          stats[type].skip = String(skip + 20);
+          newScores[4] = String(score);
+          stats[type].score = newScores;
+          stats.save();
           res.status(200).json(score);
         }
       });

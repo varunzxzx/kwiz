@@ -7,101 +7,52 @@ const Stats = new Schema({
     required: true
   },
   basics: {
-    score: {
-      type: String,
-      default: "0"
-    },
+    score: [String],
     skip: {
       type: String,
       default: "0"
-    },
-    limit: {
-      type: String,
-      default: "20"
     }
   },
   functionOverloading: {
-    score: {
-      type: String,
-      default: "0"
-    },
+    score: [String],
     skip: {
       type: String,
       default: "0"
-    },
-    limit: {
-      type: String,
-      default: "20"
     }
   },
   constructorDestructor: {
-    score: {
-      type: String,
-      default: "0"
-    },
+    score: [String],
     skip: {
       type: String,
       default: "0"
-    },
-    limit: {
-      type: String,
-      default: "20"
     }
   },
   pointer: {
-    score: {
-      type: String,
-      default: "0"
-    },
+    score: [String],
     skip: {
       type: String,
       default: "0"
-    },
-    limit: {
-      type: String,
-      default: "20"
     }
   },
   array: {
-    score: {
-      type: String,
-      default: "0"
-    },
+    score: [String],
     skip: {
       type: String,
       default: "0"
-    },
-    limit: {
-      type: String,
-      default: "20"
     }
   },
   classesInheritance: {
-    score: {
-      type: String,
-      default: "0"
-    },
+    score: [String],
     skip: {
       type: String,
       default: "0"
-    },
-    limit: {
-      type: String,
-      default: "20"
     }
   },
   polymorphism: {
-    score: {
-      type: String,
-      default: "0"
-    },
+    score: [String],
     skip: {
       type: String,
       default: "0"
-    },
-    limit: {
-      type: String,
-      default: "20"
     }
   },
 }, { collection: 'Stats' });

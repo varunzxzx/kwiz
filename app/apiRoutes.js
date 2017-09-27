@@ -35,8 +35,10 @@ router.use(/\/((?!(addUser)|(authenticate)|(addQuestion)).)*/, function (req, re
 
 router.use('/getQuestion',(req, res, next) => {
   var type = req.headers['x-access-type'] || null;
+  var limit = req.headers['x-access-limit'] || null;
   if(type) {
     req.type = type;
+    req.limit = limit;
     next();
   } else {
     res.status(400).json({success: false, msg: "Insufficient details"});

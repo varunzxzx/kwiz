@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import 'typeface-roboto';
 import SwipeableViews from 'react-swipeable-views';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';

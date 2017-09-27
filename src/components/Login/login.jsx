@@ -22,7 +22,8 @@ class Login extends Component {
       cpassword: "",
       loginStatus: false,
       token: "",
-      loading: false
+      loading: false,
+      isRegistered: false
     }
   }
 
@@ -58,6 +59,37 @@ class Login extends Component {
         }
     }
     return "";
+  }
+
+  handleRegister = (e) => {
+    e.preventDefault();
+    if(this.state.password != this.state.cpassword) {
+
+    } else {
+      this.setState({loading: true});
+      const payload = {
+          enrollment: this.state.enrollment
+      };
+      const thiss = this;
+      axios({
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+          },
+              url: '/api/authregister',
+              mode: 'cors',
+              data: JSON.stringify(payload)
+          })
+          .then(function (response) {
+              thiss.setState({isRegistered: true,loading: false});
+              //thiss.handleRegisteration()
+              console.log(response.data);
+          })
+          .catch(function (error) {
+            thiss.setState({loading: false});
+              console.log("error");
+          });
+    }
   }
 
   componentWillMount() {
@@ -197,7 +229,7 @@ class Login extends Component {
                   </form>
                 }</div>
                 <div style={{ padding: 20 }}>{
-                  <form>
+                  <form onSubmit={(e) => {this.handleRegister(e)}}>
                     <TextField
                       name="enrollment"
                       label="Enrollment No."
@@ -218,7 +250,7 @@ class Login extends Component {
                     />
                     <br />
                     <TextField
-                      name="password"
+                      name="cpassword"
                       label="Confirm Password"
                       onChange={(e)=>{this.handleTextChange(e)}}
                       type="password"
@@ -226,7 +258,7 @@ class Login extends Component {
                       className={classnames('text-input')}
                       fullWidth
                     />
-                    <Button raised color="primary" className={classnames('login-btn')}>
+                    <Button onClick={this.handleRegister} raised color="primary" className={classnames('login-btn')}>
                       REGISTER
                     </Button>
                   </form>

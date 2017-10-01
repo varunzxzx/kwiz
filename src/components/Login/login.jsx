@@ -9,6 +9,13 @@ import Checkbox from 'material-ui/Checkbox';
 import Button from 'material-ui/Button';
 import axios from 'axios';
 import { CircularProgress } from 'material-ui/Progress';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
+import Slide from 'material-ui/transitions/Slide';
 
 class Login extends Component {
   constructor(props){
@@ -23,13 +30,21 @@ class Login extends Component {
       loginStatus: false,
       token: "",
       loading: false,
-      isRegistered: false
+      isRegistered: false,
+      email : "",
+      otp: "",
+      registerSuccess: false,
+      name: ""
     }
   }
 
   handleChange = (event, value) => {
     this.setState({ value });
   };
+
+  handleDialogChange = (e,v) => {
+    this.setState({method: e.target.value})
+  }
 
   handleChangeIndex = index => {
     this.setState({ value: index });
@@ -81,12 +96,10 @@ class Login extends Component {
               data: JSON.stringify(payload)
           })
           .then(function (response) {
-              thiss.setState({isRegistered: true,loading: false});
-              //thiss.handleRegisteration()
-              console.log(response.data);
+              thiss.setState({isRegistered: true, email: response.data.email, loading: false});
           })
           .catch(function (error) {
-            thiss.setState({loading: false});
+            thiss.setState({loading: false})
               console.log("error");
           });
     }
@@ -164,6 +177,36 @@ class Login extends Component {
             thiss.setState({loading: false});
             console.log("error");
         });
+  }
+
+  handleRequestClose = () => {
+    this.setState({ isRegistered: false, registerSuccess: false});
+  };
+
+  handleRegistration = () => {
+    const thiss = this;
+    this.setState({isRegistered: false, loading: true})
+      const payload = {
+          enrollment: this.state.enrollment,
+          password: this.state.password,
+          token: this.state.otp
+      };
+      axios({
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+          },
+              url: '/api/register',
+              mode: 'cors',
+              data: JSON.stringify(payload)
+          })
+          .then(function (response) {
+            console.log(response.data)
+              thiss.setState({registerSuccess: true, loading: false, name: response.data.name})
+          })
+          .catch(function (error) {
+              thiss.setState({loading: false});
+          });
   }
 
   render() {
@@ -264,6 +307,33 @@ class Login extends Component {
                   </form>
                 }</div>
               </SwipeableViews>
+              <Dialog open={this.state.isRegistered} transition={Slide} onRequestClose={this.handleRequestClose}>
+                <DialogTitle>{"OTP Sent"}</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    A one time password has been sent to {this.state.email}.
+                    <input style={{width: "60%",marginTop: "20px",marginLeft: "50px"}} type="text" placeholder="Enter OTP here" onChange={(e) => {this.setState({otp: e.target.value})}}/>
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  {this.state.otp != "" && <Button onClick={() => {this.handleRegistration()}} color="primary" raised>
+                    SUBMIT
+                  </Button>}
+                </DialogActions>
+              </Dialog>
+              <Dialog open={this.state.registerSuccess} transition={Slide} onRequestClose={this.handleRequestClose}>
+                <DialogTitle>{"Successfully Registered"}</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    Hey {this.state.name}, You have successfuly registered to KWIZ - Online Quiz Portal. Enjoy
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={() => {this.setState({value: 0});this.handleRequestClose()}} color="primary" raised>
+                    OK
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </div>
           </div>
         }

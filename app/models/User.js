@@ -19,9 +19,6 @@ const User = new Schema({
     type: String,
     required: true
   },
-  reset_token: {
-    type: String
-  },
   password: {
       type: String,
       required: true
@@ -38,7 +35,8 @@ const User = new Schema({
 }, { collection: 'Users' });
 
 const salt = parseInt(process.env.SALT_WORK_FACTOR) || 10;
-User.statics.hashPassword = function (password, cb) {
+var hash;
+User.statics.hashPassword = hash = function (password, cb) {
     bcrypt.genSalt(salt, function (err, salt) {
         if (err) return cb(err);
         bcrypt.hash(password, salt, function (err, hash) {
@@ -54,14 +52,15 @@ User.pre('validate', function (next) {
     now = new Date();
     user.updated_at = now;
     if (!user.created_at) {
+      console.log("creating...");
         user.created_at = now;
     }
     if (!user.isModified('password')) {
       console.log("inside password");
       return next();
     }
-    hashPassword(user.password, function (err, hash) {
-      console.log("inside hash")
+    hash(user.password, function (err, hash) {
+      console.log("inside hash ");
         if (err) return next(err);
         user.password = hash;
         next();

@@ -1,0 +1,135 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+
+        html, body {
+            padding: 0;
+            margin: 0;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 2em;
+            position: relative;
+            top: 15px;
+        }
+
+        .logo img {
+          margin: auto;
+          position: relative !important;
+        }
+
+        .jumbotron {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            background: #EEE;
+        }
+
+        .logo .title {
+            font-family: 'Roboto', sans-serif;
+            position: relative;
+            left: 5px;
+            font-size: 105%;
+        }
+
+        @media only screen and (min-width:642px){
+          .logo img {
+            top: 15px !important;
+          }
+        }
+
+        .container {
+            width: 70% !important;
+            margin: auto;
+        }
+
+        .body {
+            text-align: center;
+            background: white;
+            padding: 20px 10% 20px 10%;
+            border: 1px solid #DFE1E5;
+            margin: 6% auto 0 auto;
+            max-width: 700px;
+        }
+
+        p.content {
+            font-size: 1.3em;
+            font-family: 'Slabo 27px', serif;
+            margin-top: 10%;
+            font-weight: bold;
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+
+        .body h3 {
+            font-size: 1.9em;
+            padding: 0;
+        }
+
+        hr {
+            width: 70%;
+        }
+
+        a {
+            margin: 7% auto;
+            text-decoration: none;
+        }
+
+        .btn {
+            padding: 2% 5%;
+            font-size: 1.2em;
+            margin-bottom: 0;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .btn.btn-primary {
+          color: #fff;
+          background-color: #337ab7;
+          border-color: #2e6da4;
+          position: relative;
+          top: 15px;
+        }
+
+        .footer {
+            margin-top: 15%;
+            font-size: 1em !important;
+            color: rgba(0, 0, 0, 0.5) !important;
+        }
+
+    </style>
+</head>
+<body>
+<div class="jumbotron">
+    <div class="container">
+        <div class="logo text-center"><img src="https://3.bp.blogspot.com/-jZvDhZhQyKE/WdNeo00AxgI/AAAAAAAABSU/q4gF_EZ7zFESL5LiDv2qNEEQ2pWfoz7ggCLcBGAs/s1600/logo.PNG" alt="Logo"
+                                           width="60rem">
+            <div class="title">KWIZ - Online Quiz Portal</div>
+        </div>
+        <div class="body">
+            <h3>OTP Verification</h3>
+            <hr/>
+            <p class="content">This OTP can only be used in registeration. Do not share it with anyone.</p>
+            <a href="#" class="btn btn-primary"> {{token}} </a>
+            <p class="footer">If you did not request an OTP, you can safely ignore this email. Only a person
+                with access to your email can reset your account password.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

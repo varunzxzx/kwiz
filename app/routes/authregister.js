@@ -29,7 +29,7 @@ var authregister = (req,res) => {
               from: `"admin" <${process.env.EMAIL}>`, // sender address
               to: user.email, // list of receivers
               subject: 'Kwiz OTP Verification', // Subject line // plain text body
-              html: `<b>${token}</b>` // html body
+              html: {path: `${process.env.DOMAIN}:${process.env.PORT || 4000}/api/mailPage?token=${token}`,} // html body
           };
 
           // send mail with defined transport object
@@ -41,7 +41,18 @@ var authregister = (req,res) => {
             console.log('Message %s sent: %s', info.messageId, info.response);
           });
         });
-        res.status(200).json({success: true, msg: "Successful!!",email: user.email, phone: user.phone})
+        let email = user.email;
+        String.prototype.replaceAt=function(index, replacement) {
+            return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
+        }
+        const n = email.split("@")[0].length;
+        let str = "";
+        let i;
+        for(i=0;i<n-3;i++) {
+          str += "*";
+        }
+        email = email.replaceAt(0,str);
+        res.status(200).json({email: email})
       }
     })
   }

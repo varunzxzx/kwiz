@@ -311,7 +311,7 @@ class Login extends Component {
                 <DialogTitle>{"OTP Sent"}</DialogTitle>
                 <DialogContent>
                   <DialogContentText>
-                    A one time password has been sent to {this.state.email}.
+                    A one time password has been sent to  {this.state.email}
                     <input style={{width: "60%",marginTop: "20px",marginLeft: "50px"}} type="text" placeholder="Enter OTP here" onChange={(e) => {this.setState({otp: e.target.value})}}/>
                   </DialogContentText>
                 </DialogContent>

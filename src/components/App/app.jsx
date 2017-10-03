@@ -76,7 +76,7 @@ class ButtonAppBar extends Component {
               {this.state.component}
             </Typography>
             <IconButton color="contrast">
-              <Badge color="accent" badgeContent={3} className={classnames('badge')}><NotificationIcon/></Badge>
+              <Badge color="accent" badgeContent={0} className={classnames('badge')}><NotificationIcon/></Badge>
             </IconButton>
             <IconButton onClick={() => {this.deleteCookie('token')}} color="contrast"><PowerIcon/></IconButton>
           </Toolbar>

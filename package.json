@@ -4,7 +4,7 @@
   "description": "Quiz Web App",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "build:prod": "webpack --colors --display-error-details --config webpack.config.js -p && cp -r assets/* dist/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

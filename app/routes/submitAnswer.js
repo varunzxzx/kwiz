@@ -27,12 +27,15 @@ var submitAnswer = (req,res) => {
           stats.total = String(total);
           var i;
           var newScores = [];
+          var newPrev = [];
           for(i=0;i<=3;i++) {
             newScores[i] = stats[type].score[i+1]?stats[type].score[i+1]:"0";
+            newPrev[i] = stats.prev[i+1]?stats.prev[i+1]:"0";
           }
           stats[type].skip = String(skip + 20);
-          newScores[4] = String(score);
+          newPrev[4] = newScores[4] = String(score);
           stats[type].score = newScores;
+          stats.prev = newPrev;
           stats.save();
           res.status(200).json(score);
         }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NotFoundIcon from 'material-ui-icons/roomService';
+import NotFoundIcon from 'material-ui-icons/RoomService';
 import Typography from 'material-ui/Typography';
 
 class Contest extends Component {

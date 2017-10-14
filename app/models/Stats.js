@@ -10,6 +10,9 @@ const Stats = new Schema({
     type: String,
     default: "0"
   },
+  prev: {
+    type: [String]
+  },
   basics: {
     score: [String],
     skip: {

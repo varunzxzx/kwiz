@@ -15,8 +15,8 @@ class Dashboard extends Component {
               0,
               0,
               0,
-              0,
-              0
+              60,
+              90
             ],
             backgroundColor:[
               'rgba(54, 162, 235, 0.6)'

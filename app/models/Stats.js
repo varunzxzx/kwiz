@@ -15,6 +15,10 @@ const Stats = new Schema({
   },
   basics: {
     score: [String],
+    total: {
+      type: Number,
+      default: 0
+    },
     skip: {
       type: String,
       default: "0"
@@ -22,6 +26,10 @@ const Stats = new Schema({
   },
   functionOverloading: {
     score: [String],
+    total: {
+      type: Number,
+      default: 0
+    },
     skip: {
       type: String,
       default: "0"
@@ -29,6 +37,10 @@ const Stats = new Schema({
   },
   constructorDestructor: {
     score: [String],
+    total: {
+      type: Number,
+      default: 0
+    },
     skip: {
       type: String,
       default: "0"
@@ -36,6 +48,10 @@ const Stats = new Schema({
   },
   pointer: {
     score: [String],
+    total: {
+      type: Number,
+      default: 0
+    },
     skip: {
       type: String,
       default: "0"
@@ -43,6 +59,10 @@ const Stats = new Schema({
   },
   array: {
     score: [String],
+    total: {
+      type: Number,
+      default: 0
+    },
     skip: {
       type: String,
       default: "0"
@@ -50,6 +70,10 @@ const Stats = new Schema({
   },
   classesInheritance: {
     score: [String],
+    total: {
+      type: Number,
+      default: 0
+    },
     skip: {
       type: String,
       default: "0"
@@ -57,6 +81,10 @@ const Stats = new Schema({
   },
   polymorphism: {
     score: [String],
+    total: {
+      type: Number,
+      default: 0
+    },
     skip: {
       type: String,
       default: "0"

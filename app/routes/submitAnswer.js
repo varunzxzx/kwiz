@@ -18,16 +18,18 @@ var submitAnswer = (req,res) => {
         } else {
           let score = 0;
           let total = parseInt(stats.total);
+          /* Caluculating the score of quiz type */
           for (i=0; i<req.body.answers.length; i++) {
             if(req.body.answers[i] == question[i].crct) {
               score += 1;
             }
           }
           total += score;
-          stats.total = String(total);
+          stats.total = String(total); //Assigning total of whole
           var i;
           var newScores = [];
           var newPrev = [];
+          /* Passing the total in the array of wholw and the quiz type */
           for(i=0;i<=3;i++) {
             newScores[i] = stats[type].score[i+1]?stats[type].score[i+1]:"0";
             newPrev[i] = stats.prev[i+1]?stats.prev[i+1]:"0";
@@ -36,6 +38,10 @@ var submitAnswer = (req,res) => {
           newPrev[4] = newScores[4] = String(score);
           stats[type].score = newScores;
           stats.prev = newPrev;
+          /* Incrementing the total of quiz type */
+          let totalScore = stats[type].total;
+          totalScore += score;
+          stats[type].total = totalScore;
           stats.save();
           res.status(200).json(score);
         }

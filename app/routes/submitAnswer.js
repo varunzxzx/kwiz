@@ -29,7 +29,7 @@ var submitAnswer = (req,res) => {
           var i;
           var newScores = [];
           var newPrev = [];
-          /* Passing the total in the array of wholw and the quiz type */
+          /* Passing the total in the array of whole and the quiz type */
           for(i=0;i<=3;i++) {
             newScores[i] = stats[type].score[i+1]?stats[type].score[i+1]:"0";
             newPrev[i] = stats.prev[i+1]?stats.prev[i+1]:"0";

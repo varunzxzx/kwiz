@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {Line} from 'react-chartjs-2';
-import {Pie} from 'react-chartjs-2';
+import {Line, Pie} from 'react-chartjs-2';
 import Card, { CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import List, { ListItem, ListItemText } from 'material-ui/List';

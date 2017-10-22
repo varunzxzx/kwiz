@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import classnames from 'classnames';
-import PrevIcon from 'material-ui-icons/keyboardArrowLeft';
-import NextIcon from 'material-ui-icons/keyboardArrowRight';
+import PrevIcon from 'material-ui-icons/KeyboardArrowLeft';
+import NextIcon from 'material-ui-icons/KeyboardArrowRight';
 import Button from 'material-ui/Button';
 import Input, { InputLabel } from 'material-ui/Input';
 import { MenuItem } from 'material-ui/Menu';

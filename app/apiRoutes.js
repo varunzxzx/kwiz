@@ -10,6 +10,8 @@ const submitAnswer = require('./routes/submitAnswer.js');
 const register = require('./routes/register.js');
 const authregister = require('./routes/authregister.js');
 const mailPage = require('./routes/mailPage.js');
+const dashboard = require('./routes/dashboard/dashboard.js');
+const statistics = require('./routes/statistics/statistics.js');
 
 router.use(function (req, res, next) {
     try {
@@ -57,5 +59,8 @@ router.post('/addQuestion',addQuestion);
 router.post('/submitAnswer',submitAnswer);
 router.post('/register',register);
 router.post('/authregister',authregister);
+
+router.get('/dashboard',dashboard);
+router.get('/statistics',statistics);
 
 module.exports = router;

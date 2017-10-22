@@ -8,7 +8,7 @@ import Card, { CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import ReplayIcon from 'material-ui-icons/Replay';
-import ArrowIcon from 'material-ui-icons/arrowBack';
+import ArrowIcon from 'material-ui-icons/ArrowBack';
 import { browserHistory } from 'react-router';
 
 class Practice extends Component {
@@ -117,7 +117,7 @@ class Practice extends Component {
               <Button raised color="primary" onClick={() => {location.reload()}}>
               <ReplayIcon/>&nbsp;&nbsp;Play Again
               </Button>
-              <Button raised color="accent" onClick={() => {browserHistory.push('/')}}>
+              <Button raised color="accent" onClick={() => {browserHistory.push('/');location.reload()}}>
                 <ArrowIcon/>&nbsp;&nbsp;Go Back
               </Button>
             </CardContent>

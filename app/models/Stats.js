@@ -7,53 +7,92 @@ const Stats = new Schema({
     required: true
   },
   total: {
-    type: String,
-    default: "0"
+    type: Number,
+    default: 0
+  },
+  prev: {
+    type: [Number]
+  },
+  quesAttempt: {
+    type: Number,
+    default: 0
+  },
+  quizPlay: {
+    type: Number,
+    default: 0
   },
   basics: {
-    score: [String],
+    score: [Number],
+    total: {
+      type: Number,
+      default: 0
+    },
     skip: {
       type: String,
       default: "0"
     }
   },
   functionOverloading: {
-    score: [String],
+    score: [Number],
+    total: {
+      type: Number,
+      default: 0
+    },
     skip: {
       type: String,
       default: "0"
     }
   },
   constructorDestructor: {
-    score: [String],
+    score: [Number],
+    total: {
+      type: Number,
+      default: 0
+    },
     skip: {
       type: String,
       default: "0"
     }
   },
   pointer: {
-    score: [String],
+    score: [Number],
+    total: {
+      type: Number,
+      default: 0
+    },
     skip: {
       type: String,
       default: "0"
     }
   },
   array: {
-    score: [String],
+    score: [Number],
+    total: {
+      type: Number,
+      default: 0
+    },
     skip: {
       type: String,
       default: "0"
     }
   },
   classesInheritance: {
-    score: [String],
+    score: [Number],
+    total: {
+      type: Number,
+      default: 0
+    },
     skip: {
       type: String,
       default: "0"
     }
   },
   polymorphism: {
-    score: [String],
+    score: [Number],
+    total: {
+      type: Number,
+      default: 0
+    },
     skip: {
       type: String,
       default: "0"

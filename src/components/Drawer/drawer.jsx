@@ -4,10 +4,10 @@ import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import DashboardIcon from 'material-ui-icons/Dashboard';
 import TimelineIcon from 'material-ui-icons/Timeline';
-import PracticeIcon from 'material-ui-icons/code';
-import ContestIcon from 'material-ui-icons/casino';
-import LeaderboardIcon from 'material-ui-icons/stars';
-import ProfileIcon from 'material-ui-icons/accountCircle'
+import PracticeIcon from 'material-ui-icons/Code';
+import ContestIcon from 'material-ui-icons/Casino';
+import LeaderboardIcon from 'material-ui-icons/Stars';
+import ProfileIcon from 'material-ui-icons/AccountCircle'
 import classnames from 'classnames';
 import { withStyles } from 'material-ui/styles';
 

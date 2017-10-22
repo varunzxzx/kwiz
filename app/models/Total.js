@@ -29,6 +29,10 @@ const Total = new Schema({
   polymorphism: {
     type: String,
     required: true
+  },
+  total: {
+    type: Number,
+    default: 0
   }
 }, { collection: 'Total' });
 

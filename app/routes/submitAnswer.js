@@ -17,7 +17,7 @@ var submitAnswer = (req,res) => {
           res.status(401).json({success: false,msg: "Not found!"})
         } else {
           let score = 0;
-          let total = parseInt(stats.total);
+          let total = stats.total;
           /* Caluculating the score of quiz type */
           for (i=0; i<req.body.answers.length; i++) {
             if(req.body.answers[i] == question[i].crct) {
@@ -25,7 +25,7 @@ var submitAnswer = (req,res) => {
             }
           }
           total += score;
-          stats.total = String(total); //Assigning total of whole
+          stats.total = total; //Assigning total of whole
           var i;
           var newScores = [];
           var newPrev = [];
@@ -35,13 +35,21 @@ var submitAnswer = (req,res) => {
             newPrev[i] = stats.prev[i+1]?stats.prev[i+1]:"0";
           }
           stats[type].skip = String(skip + 20);
-          newPrev[4] = newScores[4] = String(score);
+          newPrev[4] = newScores[4] = score;
           stats[type].score = newScores;
           stats.prev = newPrev;
           /* Incrementing the total of quiz type */
           let totalScore = stats[type].total;
           totalScore += score;
           stats[type].total = totalScore;
+
+          /* Incrementing Questions Attempted */
+          console.log(question.length);
+          stats.quesAttempt += question.length;
+
+          /* Incrementing Quiz Play */
+          stats.quizPlay += 1;
+
           stats.save();
           res.status(200).json(score);
         }

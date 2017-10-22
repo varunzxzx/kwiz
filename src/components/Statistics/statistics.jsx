@@ -7,52 +7,95 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import {Line} from 'react-chartjs-2';
 import classnames from 'classnames';
+import axios from 'axios';
 
 class Statistics extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      selected: "",
-      chartData:{
-        labels: ['1', '2', '3', '4', '5'],
-        datasets:[
-          {
-            label:'Progress',
-            data:[
-              0,
-              0,
-              0,
-              60,
-              90
-            ],
-            backgroundColor:[
-              'rgba(54, 162, 235, 0.6)'
-            ]
-          }
-        ]
-      }
+      chartData: {},
+      average: "",
+      rank: ""
     }
-    let width = window.innerWidth;
-    if (width > 768) {
-      this.state.renderComponent = this.desktop();
-     } else {
-       this.state.renderComponent = this.mobile();
-     }
     window.addEventListener('resize', () => {
       this.onresize();
     }, true);
   }
 
+  componentWillMount() {
+    this.getData("Basics");
+    let width = window.innerWidth;
+    if (width > 768) {
+      this.setState({renderComponent : this.desktop("Basics")});
+     } else {
+       this.setState({renderComponent : this.mobile("Basics")});
+     }
+  }
+
+  getData = (e) => {
+    const thiss = this;
+    let arr;
+    let str = "";
+    let flag = false;
+    arr = e.toLowerCase().split(" ");
+    arr.map(value => {
+      if(value != "&") {
+        if(flag) {
+          value = value.charAt(0).toUpperCase() + value.slice(1);
+          str += value;
+        } else {
+          flag = true;
+          str += value;
+        }
+      }
+    });
+    thiss.onresize(e);
+    axios({
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'x-access-token': this.props.token,
+            'x-access-type': str
+        },
+            url: '/api/statistics',
+            mode: 'cors'
+        })
+        .then(function (response) {
+          let chartData = {
+            labels: ['1', '2', '3', '4', '5'],
+            datasets:[
+              {
+                label:'Progress',
+                data:response.data.progress,
+                backgroundColor:[
+                  'rgba(54, 162, 235, 0.6)'
+                ]
+              }
+            ]
+          }
+          thiss.setState({
+            chartData: chartData,
+            average: response.data.average,
+            rank: response.data.rank
+          });
+          thiss.onresize(e)
+          console.log("success");
+        })
+        .catch(function(err) {
+          console.log("error");
+        })
+}
+
   handleSelected = (e) => {
-    this.onresize(e);
+    this.getData(e);
   }
 
   desktop = (e) => {
     return(
       <div className="dash">
         <div style={{flexGrow: "1",width: "95%", margin: "auto"}}>
-          <Grid container spacing={24}>
+          <Grid container spacing={16}>
             <Grid item xs={4}>
               <Card>
                 <CardContent>
@@ -84,7 +127,7 @@ class Statistics extends Component {
                   />
                 </CardContent>
               </Card>
-              <Grid container spacing={24} style={{marginTop: "10px"}}>
+              <Grid container spacing={16} style={{marginTop: "10px"}}>
                 <Grid item xs={6}>
                   <Card>
                     <CardContent style={{margin: "0",padding: "0"}}>
@@ -92,7 +135,7 @@ class Statistics extends Component {
                         Average Score
                       </Typography>
                       <Typography align="center" type="display3" gutterBottom>
-                        42.32
+                        {this.state.average}%
                       </Typography>
                     </CardContent>
                   </Card>
@@ -104,7 +147,7 @@ class Statistics extends Component {
                         Overall Rank
                       </Typography>
                       <Typography align="center" type="display3" gutterBottom>
-                        16
+                        {this.state.rank}
                       </Typography>
                     </CardContent>
                   </Card>
@@ -120,7 +163,7 @@ class Statistics extends Component {
   mobile = () => {
     return(
       <div className="dash">
-        <h1>Hello, This is mobile</h1>
+        <h3>Oops! You are using mobile. It will be updated soon</h3>
       </div>
     )
   }

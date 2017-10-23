@@ -13,7 +13,7 @@ let statistics = (req,res) => {
     Stats.find({},(err,stats) => {
       if(err) res.status(400).json({success: false, msg: "Technical error"});
       let sortedRecord = stats.sort((a,b) => {
-        return a[type].total - b[type].total;
+        return b[type].total - a[type].total;
       });
       rank = sortedRecord.findIndex(i => i.enrollment === stat.enrollment);
     });

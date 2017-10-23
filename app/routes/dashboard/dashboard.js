@@ -29,7 +29,7 @@ let dashboard = function (req, res) {
       Stats.find({},(err,stats) => {
         if(err) res.status(400).json({success: false, msg: "Technical error"});
         let sortedRecord = stats.sort((a,b) => {
-          return a.total - b.total;
+          return b.total - a.total;
         });
         rank = sortedRecord.findIndex(i => i.enrollment === stat.enrollment);
       });

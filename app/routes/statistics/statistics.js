@@ -12,12 +12,18 @@ let statistics = (req,res) => {
     let rank = 0;
     Stats.find({},(err,stats) => {
       if(err) res.status(400).json({success: false, msg: "Technical error"});
+      //console.log(stats);
       let sortedRecord = stats.sort((a,b) => {
-        return b[type].total - a[type].total;
+        return b.total - a.total;
       });
-      rank = sortedRecord.findIndex(i => i.enrollment === stat.enrollment);
+      for(let i=0;i<sortedRecord.length;i++) {
+        if(sortedRecord[i].enrollment == ern) {
+          data.rank = rank + 1;
+          break;
+        }
+        rank++;
+      }
     });
-    data.rank = rank + 1;
 
     /* Progress */
     data.progress = stat[type].score;

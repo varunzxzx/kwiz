@@ -10,6 +10,7 @@ import Practice from './components/Practice/practice.jsx';
 import Contest from './components/Contest/contest.jsx';
 import Leaderboard from './components/Leaderboard/leaderboard.jsx';
 import Profile from './components/Profile/profile.jsx';
+import Resources from './components/Resources/resources.jsx';
 
 ReactDOM.render(
   <Router history={browserHistory}>
@@ -21,6 +22,7 @@ ReactDOM.render(
         <Route path='/contest' component={Contest} />
         <Route path='/leaderboard' component={Leaderboard} />
         <Route path='/profile' component={Profile} />
+        <Route path='/resources' component={Resources} />
         <Route path='*' component={NotFound} />
       </Route>
     </Route>

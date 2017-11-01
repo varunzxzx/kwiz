@@ -15,8 +15,8 @@ class Statistics extends Component {
 
     this.state = {
       chartData: {},
-      average: "",
-      rank: ""
+      rank: "",
+      average: ""
     }
     window.addEventListener('resize', () => {
       this.onresize();
@@ -50,7 +50,7 @@ class Statistics extends Component {
         }
       }
     });
-    thiss.onresize(e);
+    this.onresize(e);
     axios({
         method: 'GET',
         headers: {
@@ -106,7 +106,9 @@ class Statistics extends Component {
                   <List>
                     {["Basics","Classes & Inheritance","Function Overloading","Constructor & Destructor","Pointer","Array","Polymorphism"].map((value,i) => {
                       return(
-                        <ListItem className={e == value?classnames('selected'):classnames('selecte')} onClick={() => {this.handleSelected(value)}} key={value} button>
+                        <ListItem className={e == value?classnames('selected'):classnames('selecte')} onClick={() => {
+                          if(e != value){this.handleSelected(value)}
+                        }} key={value} button>
                           <ListItemText primary={value} />
                         </ListItem>
                       )
@@ -120,10 +122,10 @@ class Statistics extends Component {
                 <CardContent>
                   <Line
                     height={260}
-                  	data={this.state.chartData}
+                    data={this.state.chartData}
                     options={{
-                  		maintainAspectRatio: false
-                  	}}
+                      maintainAspectRatio: false
+                    }}
                   />
                 </CardContent>
               </Card>
@@ -131,11 +133,11 @@ class Statistics extends Component {
                 <Grid item xs={6}>
                   <Card>
                     <CardContent style={{margin: "0",padding: "0"}}>
-                      <Typography align="center" style={{background: "#283593",color: "white"}} type="body2" gutterBottom>
-                        Average Score
+                      <Typography align="center" style={{background: "#1565C0",color: "white"}} type="body2" gutterBottom>
+                        Rank
                       </Typography>
                       <Typography align="center" type="display3" gutterBottom>
-                        {this.state.average}%
+                        {this.state.rank}
                       </Typography>
                     </CardContent>
                   </Card>
@@ -143,11 +145,11 @@ class Statistics extends Component {
                 <Grid item xs={6}>
                   <Card>
                     <CardContent style={{margin: "0",padding: "0"}}>
-                      <Typography align="center" style={{background: "#283593",color: "white"}} type="body2" gutterBottom>
-                        Overall Rank
+                      <Typography align="center" style={{background: "#1565C0",color: "white"}} type="body2" gutterBottom>
+                        Average Score
                       </Typography>
                       <Typography align="center" type="display3" gutterBottom>
-                        {this.state.rank}
+                        {this.state.average}%
                       </Typography>
                     </CardContent>
                   </Card>

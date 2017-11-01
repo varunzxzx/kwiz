@@ -25,31 +25,27 @@ let dashboard = function (req, res) {
       data.overall = overall;
 
       /* Calculating Rank */
-      let rank = 0;
       Stats.find({},(err,stats) => {
         if(err) res.status(400).json({success: false, msg: "Technical error"});
         //console.log(stats);
         let sortedRecord = stats.sort((a,b) => {
           return b.total - a.total;
         });
-        for(let i=0;i<sortedRecord.length;i++) {
-          if(sortedRecord[i].enrollment == ern) {            
-            data.rank = rank + 1;
-            break;
-          }
-          rank++;
-        }
+        data.rank = sortedRecord.findIndex(i => i.enrollment === ern) + 1;
+        calcAverage();
       });
 
       /* Calculating average */
-      let statTotal = stat.total;
-      let average;
-      Total.find({},(err,totals) => {
-        if(err) res.status(400).json({success: false, msg: "Technical error"});
-        average = parseFloat((statTotal/totals[0].total)*100).toFixed(2);
-        data.average = String(average);
-        res.status(200).json(data);
-      })
+      let calcAverage = () => {
+        let statTotal = stat.total;
+        let average;
+        Total.find({},(err,totals) => {
+          if(err) res.status(400).json({success: false, msg: "Technical error"});
+          average = parseFloat((statTotal/totals[0].total)*100).toFixed(2);
+          data.average = String(average);
+          res.status(200).json(data);
+        })
+      }
 
     })
 };

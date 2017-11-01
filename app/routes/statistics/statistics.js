@@ -8,23 +8,6 @@ let statistics = (req,res) => {
   Stats.findOne({enrollment: ern}, (err,stat) => {
     let type = req.headers['x-access-type'] || null;
 
-    /* Calculating Rank */
-    let rank = 0;
-    Stats.find({},(err,stats) => {
-      if(err) res.status(400).json({success: false, msg: "Technical error"});
-      //console.log(stats);
-      let sortedRecord = stats.sort((a,b) => {
-        return b.total - a.total;
-      });
-      for(let i=0;i<sortedRecord.length;i++) {
-        if(sortedRecord[i].enrollment == ern) {
-          data.rank = rank + 1;
-          break;
-        }
-        rank++;
-      }
-    });
-
     /* Progress */
     data.progress = stat[type].score;
 
@@ -36,8 +19,20 @@ let statistics = (req,res) => {
       let total1 = totals[0];
       average = parseFloat((statTotal/parseInt(total1[type]))*100).toFixed(2);
       data.average = String(average);
-      res.status(200).json(data);
+      calcRank();
     })
+
+    /* Calculating Rank */
+    let calcRank = () => {
+      Stats.find({},(err,stats) => {
+        if(err) res.status(400).json({success: false, msg: "Technical error"});
+        let sortedRecord = stats.sort((a,b) => {
+          return b[type].total - a[type].total;
+        });
+        data.rank = sortedRecord.findIndex(i => i.enrollment === ern) + 1;
+        res.status(200).json(data);
+      });
+    }
   })
 }
 

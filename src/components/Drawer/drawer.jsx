@@ -76,6 +76,14 @@ class sDrawer extends Component {
               <ListItemText className={this.state.active=='statistics'?classnames('listText'):classnames('listTet')} primary="Statistics"/>
             </ListItem>
           }</List>
+          <List className={classes.list} onClick={() => {this.handleClick('resources')}}>{
+            <ListItem button>
+              <ListItemIcon className={this.state.active=='resources'?classes.listItem:classes.listIte}>
+                <ProfileIcon />
+              </ListItemIcon>
+              <ListItemText className={this.state.active=='resources'?classnames('listText'):classnames('listTet')} primary="Resources"/>
+            </ListItem>
+          }</List>
           <List className={classes.list} onClick={() => {this.handleClick('leaderboard')}}>{
             <ListItem button>
               <ListItemIcon className={this.state.active=='leaderboard'?classes.listItem:classes.listIte}>

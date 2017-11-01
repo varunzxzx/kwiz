@@ -12,6 +12,8 @@ const authregister = require('./routes/authregister.js');
 const mailPage = require('./routes/mailPage.js');
 const dashboard = require('./routes/dashboard/dashboard.js');
 const statistics = require('./routes/statistics/statistics.js');
+const resources = require('./routes/resources/resources.js');
+const leaderboard = require('./routes/leaderboard/leaderboard.js');
 
 router.use(function (req, res, next) {
     try {
@@ -62,5 +64,7 @@ router.post('/authregister',authregister);
 
 router.get('/dashboard',dashboard);
 router.get('/statistics',statistics);
+router.get('/resources',resources);
+router.get('/leaderboard',leaderboard);
 
 module.exports = router;

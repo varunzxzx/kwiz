@@ -9,6 +9,8 @@ import Checkbox from 'material-ui/Checkbox';
 import Button from 'material-ui/Button';
 import axios from 'axios';
 import { CircularProgress } from 'material-ui/Progress';
+import Snackbar from 'material-ui/Snackbar';
+
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -34,7 +36,8 @@ class Login extends Component {
       email : "",
       otp: "",
       registerSuccess: false,
-      name: ""
+      name: "",
+      open: false
     }
   }
 
@@ -174,7 +177,7 @@ class Login extends Component {
             authSuccess(response.data.token);
         })
         .catch(function (error) {
-            thiss.setState({loading: false});
+            thiss.setState({loading: false,open: true});
             console.log("error");
         });
   }
@@ -335,6 +338,15 @@ class Login extends Component {
                 </DialogActions>
               </Dialog>
             </div>
+            <Snackbar
+              anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+              open={this.state.open}
+              onRequestClose={() => {this.setState({open: false})}}
+              SnackbarContentProps={{
+                'aria-describedby': 'message-id',
+              }}
+              message={<span id="message-id">Wrong Credentials</span>}
+            />
           </div>
         }
         </div>

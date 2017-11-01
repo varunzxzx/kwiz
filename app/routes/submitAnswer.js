@@ -34,7 +34,7 @@ var submitAnswer = (req,res) => {
             newScores[i] = stats[type].score[i+1]?stats[type].score[i+1]:"0";
             newPrev[i] = stats.prev[i+1]?stats.prev[i+1]:"0";
           }
-          stats[type].skip = String(skip + 20);
+          stats[type].skip = String(skip + req.body.answers.length);
           newPrev[4] = newScores[4] = score;
           stats[type].score = newScores;
           stats.prev = newPrev;
@@ -44,7 +44,6 @@ var submitAnswer = (req,res) => {
           stats[type].total = totalScore;
 
           /* Incrementing Questions Attempted */
-          console.log(question.length);
           stats.quesAttempt += question.length;
 
           /* Incrementing Quiz Play */

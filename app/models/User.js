@@ -23,9 +23,6 @@ const User = new Schema({
       type: String,
       required: true
   },
-  reset_token: {
-      type: String
-  },
   created_at: {
       type: Date
   },

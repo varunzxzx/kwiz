@@ -1,15 +1,14 @@
 var User = require('../models/User.js');
-const nodemailer = require('nodemailer');
 
 var authregister = (req,res) => {
   if(!req.body.enrollment) {
-    res.status(400).json({success: false, msg: "Invalid details"})
+    return res.status(400).json({success: false, msg: "Invalid details"})
   } else {
-    let token = Math.round(Math.random() * 1000000);
-    User.findOneAndUpdate({enrollment: req.body.enrollment},{reset_token: token} , (err,user) => {
-      if(err) {
-        res.status(400).json({success: false, msg: "Invaid details."})
+    User.findOne({enrollment: req.body.enrollment}, (err,user) => {
+      if(user) {
+        return res.status(400).json({success: false, msg: "User already exists"})
       }else {
+<<<<<<< HEAD
         nodemailer.createTestAccount((err, account) => {
 
           // create reusable transporter object using the default SMTP transport
@@ -53,6 +52,9 @@ var authregister = (req,res) => {
         }
         email = email.replaceAt(0,str);
         res.status(200).json({email: email})
+=======
+        return res.status(200).json({success: true, msg: "Proceed registration"})
+>>>>>>> 8eb766e257ab9b88d7d400a926fc240f4b650938
       }
     })
   }

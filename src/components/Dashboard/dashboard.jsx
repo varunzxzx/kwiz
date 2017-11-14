@@ -58,13 +58,16 @@ class Dashboard extends Component {
             mode: 'cors'
         })
         .then(function (response) {
-
+          let data = response.data.overall.map(data => {
+            return data*10;
+          });
+          console.log(data);
           let pieData = {
             labels: ['Basics', 'Classes & Inheritance', 'Function Overloading', 'Constructor & Destructor', 'Pointer', 'Array', 'Polymorphism'],
             datasets:[
               {
                 label:'Progress',
-                data:response.data.overall,
+                data:data,
                 backgroundColor:[
                   'rgba(255, 99, 132, 0.9)',
                   'rgba(54, 162, 235, 0.9)',
@@ -128,13 +131,24 @@ class Dashboard extends Component {
           <div>
             <Card style={{width: "95%",margin: "auto"}}>
               <CardContent>
-                <Line
-                  height={260}
-                	data={this.state.chartData}
-                  options={{
-                		maintainAspectRatio: false
-                	}}
-                />
+                  <Line
+                  	data={this.state.chartData}
+                    height={260}
+                    options={{scales: {
+         yAxes: [{
+             ticks: {
+                 beginAtZero: true,
+                 userCallback: function(label, index, labels) {
+                     // when the floored value is the same as the value we have a whole number
+                     if (Math.floor(label) === label) {
+                         return label;
+                     }
+
+                 },
+             }
+         }],
+     },maintainAspectRatio: false}}
+                  />
               </CardContent>
             </Card>
             <div style={{flexGrow: "1",width: "95%",margin: " 15px auto 15px auto"}}>

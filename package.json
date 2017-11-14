@@ -5,10 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-<<<<<<< HEAD
-=======
     "dev": "nodemon $NODE_DEBUG_OPTION server.js",
->>>>>>> 8eb766e257ab9b88d7d400a926fc240f4b650938
     "build:prod": "webpack --colors --display-error-details --config webpack.config.js -p && cp -r assets/* dist/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -1,6 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 let router = express.Router();
+const sendMail = require('./routes/sendMail.js');
 const getQuestion = require('./routes/getQuestion.js');
 const addUser = require('./routes/addUser.js');
 const authenticate = require('./routes/authenticate.js');
@@ -23,6 +24,8 @@ router.use(function (req, res, next) {
     }
     next();
 });
+
+router.post('/sendMail',sendMail);
 
 router.use(/\/((?!(addUser)|(authenticate)|(mailPage)|(addQuestion)|(register)|(authregister)).)*/, function (req, res, next) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'] || null;

@@ -27,8 +27,6 @@ class Login extends Component {
       value: 0,
       remember: true,
       enrollment: "",
-      password: "",
-      cpassword: "",
       loginStatus: false,
       token: "",
       loading: false,
@@ -36,18 +34,19 @@ class Login extends Component {
       email : "",
       otp: "",
       registerSuccess: false,
+      open: false,
+      willRegister: false,
       name: "",
-      open: false
+      phone: "",
+      password: "",
+      cpassword: "",
+      passMatch: true
     }
   }
 
   handleChange = (event, value) => {
     this.setState({ value });
   };
-
-  handleDialogChange = (e,v) => {
-    this.setState({method: e.target.value})
-  }
 
   handleChangeIndex = index => {
     this.setState({ value: index });
@@ -81,12 +80,10 @@ class Login extends Component {
 
   handleRegister = (e) => {
     e.preventDefault();
-    if(this.state.password != this.state.cpassword) {
-
-    } else {
       this.setState({loading: true});
       const payload = {
-          enrollment: this.state.enrollment
+          enrollment: this.state.enrollment,
+          email: this.state.email
       };
       const thiss = this;
       axios({
@@ -99,13 +96,12 @@ class Login extends Component {
               data: JSON.stringify(payload)
           })
           .then(function (response) {
-              thiss.setState({isRegistered: true, email: response.data.email, loading: false});
+              thiss.setState({willRegister: true, loading: false});
           })
           .catch(function (error) {
             thiss.setState({loading: false})
               console.log("error");
           });
-    }
   }
 
   componentWillMount() {
@@ -183,33 +179,65 @@ class Login extends Component {
   }
 
   handleRequestClose = () => {
-    this.setState({ isRegistered: false, registerSuccess: false});
+    this.setState({willRegister: false, isRegistered: false, registerSuccess: false});
   };
 
   handleRegistration = () => {
     const thiss = this;
-    this.setState({isRegistered: false, loading: true})
+    this.setState({isRegistered: false, loading: true});
+    const payload = {
+        enrollment: this.state.enrollment,
+        password: this.state.password,
+        email: this.state.email,
+        phone: this.state.phone,
+        name: this.state.name,
+        token: this.state.otp
+    };
+    axios({
+      method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+            url: '/api/register',
+            mode: 'cors',
+            data: JSON.stringify(payload)
+        })
+        .then(function (response) {
+          console.log(response.data)
+            thiss.setState({registerSuccess: true, loading: false, name: response.data.name})
+        })
+        .catch(function (error) {
+            thiss.setState({loading: false});
+        });
+  }
+
+  sendMail = () => {
+    const thiss = this;
+    if(this.state.password !== this.state.cpassword) {
+      this.setState({passMatch: false});
+    } else {
+      this.setState({willRegister: false, loading: true});
       const payload = {
-          enrollment: this.state.enrollment,
-          password: this.state.password,
-          token: this.state.otp
+          email: this.state.email,
+          enrollment: this.state.enrollment
       };
       axios({
           method: 'POST',
           headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
           },
-              url: '/api/register',
+              url: '/api/sendMail',
               mode: 'cors',
               data: JSON.stringify(payload)
           })
           .then(function (response) {
             console.log(response.data)
-              thiss.setState({registerSuccess: true, loading: false, name: response.data.name})
+              thiss.setState({isRegistered: true, loading: false})
           })
           .catch(function (error) {
               thiss.setState({loading: false});
           });
+    }
   }
 
   render() {
@@ -286,40 +314,79 @@ class Login extends Component {
                     />
                     <br />
                     <TextField
-                      name="password"
-                      label="Password"
-                      type="password"
+                      name="email"
+                      label="Email"
                       onChange={(e)=>{this.handleTextChange(e)}}
                       margin="normal"
                       className={classnames('text-input')}
                       fullWidth
                     />
                     <br />
-                    <TextField
-                      name="cpassword"
-                      label="Confirm Password"
-                      onChange={(e)=>{this.handleTextChange(e)}}
-                      type="password"
-                      margin="normal"
-                      className={classnames('text-input')}
-                      fullWidth
-                    />
-                    <Button onClick={this.handleRegister} raised color="primary" className={classnames('login-btn')}>
+                    <br />
+                    <Button onClick={this.handleRegister} type="submit" raised color="primary" className={classnames('login-btn')}>
                       REGISTER
                     </Button>
                   </form>
                 }</div>
               </SwipeableViews>
+              <Dialog open={this.state.willRegister} transition={Slide} onRequestClose={this.handleRequestClose}>
+                <DialogTitle>{"Registration"}</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    <form style={{display: 'flex',flexWrap: 'wrap'}}>
+                      <TextField
+                        name="name"
+                        label="Name"
+                        style={{width: "200px"}}
+                        value={this.state.name}
+                        onChange={(e)=>{this.handleTextChange(e)}}
+                        margin="normal"
+                      />
+                      <TextField
+                        name="phone"
+                        label="Mobile No."
+                        style={{width: "200px", marginLeft: "40px"}}
+                        value={this.state.phone}
+                        onChange={(e)=>{this.handleTextChange(e)}}
+                        margin="normal"
+                      />
+                      <TextField
+                        name="password"
+                        label="Password"
+                        type="password"
+                        style={{width: "200px"}}
+                        value={this.state.password}
+                        onChange={(e)=>{this.handleTextChange(e)}}
+                        margin="normal"
+                      />
+                      <TextField
+                        name="cpassword"
+                        label="Confirm Password"
+                        type="password"
+                        style={{width: "200px", marginLeft: "40px"}}
+                        value={this.state.cpassword}
+                        onChange={(e)=>{this.handleTextChange(e)}}
+                        margin="normal"
+                      />
+                    </form>
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={() => {this.sendMail()}} color="primary" raised>
+                    SUBMIT
+                  </Button>
+                </DialogActions>
+              </Dialog>
               <Dialog open={this.state.isRegistered} transition={Slide} onRequestClose={this.handleRequestClose}>
                 <DialogTitle>{"OTP Sent"}</DialogTitle>
                 <DialogContent>
                   <DialogContentText>
-                    A one time password has been sent to  {this.state.email}
+                    A one time password has been sent to  <em>{this.state.email}</em>
                     <input style={{width: "60%",marginTop: "20px",marginLeft: "50px"}} type="text" placeholder="Enter OTP here" onChange={(e) => {this.setState({otp: e.target.value})}}/>
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                  {this.state.otp != "" && <Button onClick={() => {this.handleRegistration()}} color="primary" raised>
+                  {<Button onClick={() => {if(this.state.otp !== ""){this.handleRegistration()}}} color="primary" raised>
                     SUBMIT
                   </Button>}
                 </DialogActions>
@@ -346,6 +413,15 @@ class Login extends Component {
                 'aria-describedby': 'message-id',
               }}
               message={<span id="message-id">Wrong Credentials</span>}
+            />
+            <Snackbar
+              anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+              open={!this.state.passMatch}
+              onRequestClose={() => {this.setState({passMatch: true})}}
+              SnackbarContentProps={{
+                'aria-describedby': 'message-id',
+              }}
+              message={<span id="message-id">Password doesn't match</span>}
             />
           </div>
         }

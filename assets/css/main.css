@@ -6,6 +6,7 @@ body {
   margin: 0;
   padding: 0;
   background: #E8EAF6;
+  height: 100vh;
 }
 
 .dash {
@@ -268,8 +269,6 @@ body {
 
 .main-container {
   background: #E8EAF6;
-  min-height: 574px;
-  overflow: auto;
 }
 
 .practice div.topics {
@@ -309,9 +308,6 @@ body {
   }
   .main-login {
     min-height: 526px !important;
-  }
-  .main-container {
-    min-height: 510px;
   }
   .loading.m div {
     margin-top: 40% !important;

@@ -33,7 +33,7 @@ let sendMail = (req,res) => {
             from: `"admin" <${process.env.EMAIL}>`, // sender address
             to: email, // list of receivers
             subject: 'Kwiz OTP Verification', // Subject line // plain text body
-            html: {path: `${process.env.DOMAIN}:${process.env.PORT || 4000}/api/mailPage?token=${token}`,} // html body
+            html: {path: `${process.env.DOMAIN}:${process.env.NODE_ENV === "development"?process.env.PORT || 4000:443}/api/mailPage?token=${token}`,} // html body
         };
 
         // send mail with defined transport object

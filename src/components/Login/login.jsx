@@ -10,6 +10,10 @@ import Button from 'material-ui/Button';
 import axios from 'axios';
 import { CircularProgress } from 'material-ui/Progress';
 import Snackbar from 'material-ui/Snackbar';
+import Responsive from 'react-responsive';
+
+const Desktop = ({ children }) => <Responsive minWidth={768} children={children} />;
+const Mobile = ({ children }) => <Responsive maxWidth={767} children={children} />;
 
 import Dialog, {
   DialogActions,
@@ -334,40 +338,78 @@ class Login extends Component {
                 <DialogContent>
                   <DialogContentText>
                     <form style={{display: 'flex',flexWrap: 'wrap'}}>
-                      <TextField
-                        name="name"
-                        label="Name"
-                        style={{width: "200px"}}
-                        value={this.state.name}
-                        onChange={(e)=>{this.handleTextChange(e)}}
-                        margin="normal"
-                      />
-                      <TextField
-                        name="phone"
-                        label="Mobile No."
-                        style={{width: "200px", marginLeft: "40px"}}
-                        value={this.state.phone}
-                        onChange={(e)=>{this.handleTextChange(e)}}
-                        margin="normal"
-                      />
-                      <TextField
-                        name="password"
-                        label="Password"
-                        type="password"
-                        style={{width: "200px"}}
-                        value={this.state.password}
-                        onChange={(e)=>{this.handleTextChange(e)}}
-                        margin="normal"
-                      />
-                      <TextField
-                        name="cpassword"
-                        label="Confirm Password"
-                        type="password"
-                        style={{width: "200px", marginLeft: "40px"}}
-                        value={this.state.cpassword}
-                        onChange={(e)=>{this.handleTextChange(e)}}
-                        margin="normal"
-                      />
+                      <Desktop>
+                        <TextField
+                          name="name"
+                          label="Name"
+                          style={{width: "200px"}}
+                          value={this.state.name}
+                          onChange={(e)=>{this.handleTextChange(e)}}
+                          margin="normal"
+                        />
+                        <TextField
+                          name="phone"
+                          label="Mobile No."
+                          style={{width: "200px", marginLeft: "40px"}}
+                          value={this.state.phone}
+                          onChange={(e)=>{this.handleTextChange(e)}}
+                          margin="normal"
+                        />
+                        <TextField
+                          name="password"
+                          label="Password"
+                          type="password"
+                          style={{width: "200px"}}
+                          value={this.state.password}
+                          onChange={(e)=>{this.handleTextChange(e)}}
+                          margin="normal"
+                        />
+                        <TextField
+                          name="cpassword"
+                          label="Confirm Password"
+                          type="password"
+                          style={{width: "200px", marginLeft: "40px"}}
+                          value={this.state.cpassword}
+                          onChange={(e)=>{this.handleTextChange(e)}}
+                          margin="normal"
+                        />
+                      </Desktop>
+                      <Mobile>
+                        <TextField
+                          name="name"
+                          label="Name"
+                          style={{width: "200px"}}
+                          value={this.state.name}
+                          onChange={(e)=>{this.handleTextChange(e)}}
+                          margin="normal"
+                        />
+                        <TextField
+                          name="phone"
+                          label="Mobile No."
+                          style={{width: "200px"}}
+                          value={this.state.phone}
+                          onChange={(e)=>{this.handleTextChange(e)}}
+                          margin="normal"
+                        />
+                        <TextField
+                          name="password"
+                          label="Password"
+                          type="password"
+                          style={{width: "200px"}}
+                          value={this.state.password}
+                          onChange={(e)=>{this.handleTextChange(e)}}
+                          margin="normal"
+                        />
+                        <TextField
+                          name="cpassword"
+                          label="Confirm Password"
+                          type="password"
+                          style={{width: "200px"}}
+                          value={this.state.cpassword}
+                          onChange={(e)=>{this.handleTextChange(e)}}
+                          margin="normal"
+                        />
+                      </Mobile>
                     </form>
                   </DialogContentText>
                 </DialogContent>

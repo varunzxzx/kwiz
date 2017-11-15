@@ -23,7 +23,8 @@ let register = (req,res) => {
             enrollment: req.body.enrollment,
             password: req.body.password,
             email: req.body.email,
-            phone: req.body.phone
+            phone: req.body.phone,
+            course: req.body.course
         })
         user.save(err => {
             if (err) {

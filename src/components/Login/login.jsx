@@ -4,13 +4,16 @@ import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import TextField from 'material-ui/TextField';
 import classnames from 'classnames';
-import { FormControlLabel } from 'material-ui/Form';
+import { FormControl,FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
 import Button from 'material-ui/Button';
 import axios from 'axios';
 import { CircularProgress } from 'material-ui/Progress';
 import Snackbar from 'material-ui/Snackbar';
 import Responsive from 'react-responsive';
+import { MenuItem } from 'material-ui/Menu';
+import Select from 'material-ui/Select';
+import Input, { InputLabel } from 'material-ui/Input';
 
 const Desktop = ({ children }) => <Responsive minWidth={768} children={children} />;
 const Mobile = ({ children }) => <Responsive maxWidth={767} children={children} />;
@@ -44,7 +47,9 @@ class Login extends Component {
       phone: "",
       password: "",
       cpassword: "",
-      passMatch: true
+      course: "",
+      passMatch: true,
+      fieldMissing: false
     }
   }
 
@@ -195,7 +200,8 @@ class Login extends Component {
         email: this.state.email,
         phone: this.state.phone,
         name: this.state.name,
-        token: this.state.otp
+        token: this.state.otp,
+        course: this.state.course
     };
     axios({
       method: 'POST',
@@ -217,7 +223,9 @@ class Login extends Component {
 
   sendMail = () => {
     const thiss = this;
-    if(this.state.password !== this.state.cpassword) {
+    if(this.state.name === "" || this.state.phone === "" || this.state.course == "" || this.state.password === "" || this.state.cpassword === "") {
+      this.setState({fieldMissing: true});
+    }else if(this.state.password !== this.state.cpassword) {
       this.setState({passMatch: false});
     } else {
       this.setState({willRegister: false, loading: true});
@@ -245,6 +253,11 @@ class Login extends Component {
   }
 
   render() {
+    const classes = {
+      menu: {
+        width: 200,
+      },
+    }
     if(this.state.loginStatus) {
       return (this.props.children && React.cloneElement(this.props.children, {data: this.state.data, token: this.state.token}));
     } else {
@@ -344,6 +357,7 @@ class Login extends Component {
                           label="Name"
                           style={{width: "200px"}}
                           value={this.state.name}
+                          className={classnames('text-input')}
                           onChange={(e)=>{this.handleTextChange(e)}}
                           margin="normal"
                         />
@@ -352,6 +366,7 @@ class Login extends Component {
                           label="Mobile No."
                           style={{width: "200px", marginLeft: "40px"}}
                           value={this.state.phone}
+                          className={classnames('text-input')}
                           onChange={(e)=>{this.handleTextChange(e)}}
                           margin="normal"
                         />
@@ -361,6 +376,7 @@ class Login extends Component {
                           type="password"
                           style={{width: "200px"}}
                           value={this.state.password}
+                          className={classnames('text-input')}
                           onChange={(e)=>{this.handleTextChange(e)}}
                           margin="normal"
                         />
@@ -370,9 +386,27 @@ class Login extends Component {
                           type="password"
                           style={{width: "200px", marginLeft: "40px"}}
                           value={this.state.cpassword}
+                          className={classnames('text-input')}
                           onChange={(e)=>{this.handleTextChange(e)}}
                           margin="normal"
                         />
+                        <FormControl className={classnames('text-input')} style={{minWidth: "200",marginTop: "16px"}}>
+                          <InputLabel htmlFor="course">Course</InputLabel>
+                          <Select
+                            name="course"
+                            value={this.state.course}
+                            onChange={(e)=>{this.setState({course: e.target.value})}}
+                            input={<Input id="course" />}
+                            >
+                            {
+                              ["BCA","CSE","IT","EEE","ECE","Other"].map((option,i) => {
+                                return(
+                                  <MenuItem key={i} value={option}>{option}</MenuItem>
+                                )
+                              })
+                            }
+                          </Select>
+                        </FormControl>
                       </Desktop>
                       <Mobile>
                         <TextField
@@ -382,6 +416,7 @@ class Login extends Component {
                           value={this.state.name}
                           onChange={(e)=>{this.handleTextChange(e)}}
                           margin="normal"
+                          className={classnames('text-input')}
                         />
                         <TextField
                           name="phone"
@@ -390,6 +425,7 @@ class Login extends Component {
                           value={this.state.phone}
                           onChange={(e)=>{this.handleTextChange(e)}}
                           margin="normal"
+                          className={classnames('text-input')}
                         />
                         <TextField
                           name="password"
@@ -399,6 +435,7 @@ class Login extends Component {
                           value={this.state.password}
                           onChange={(e)=>{this.handleTextChange(e)}}
                           margin="normal"
+                          className={classnames('text-input')}
                         />
                         <TextField
                           name="cpassword"
@@ -408,7 +445,25 @@ class Login extends Component {
                           value={this.state.cpassword}
                           onChange={(e)=>{this.handleTextChange(e)}}
                           margin="normal"
+                          className={classnames('text-input')}
                         />
+                        <FormControl className={classnames('text-input')} style={{minWidth: "200",marginTop: "16px"}}>
+                          <InputLabel htmlFor="course">Course</InputLabel>
+                          <Select
+                            name="course"
+                            value={this.state.course}
+                            onChange={(e)=>{this.setState({course: e.target.value})}}
+                            input={<Input id="course" />}
+                            >
+                            {
+                              ["BCA","CSE","IT","EEE","ECE","Other"].map((option,i) => {
+                                return(
+                                  <MenuItem key={i} value={option}>{option}</MenuItem>
+                                )
+                              })
+                            }
+                          </Select>
+                        </FormControl>
                       </Mobile>
                     </form>
                   </DialogContentText>
@@ -464,6 +519,15 @@ class Login extends Component {
                 'aria-describedby': 'message-id',
               }}
               message={<span id="message-id">Password doesn't match</span>}
+            />
+            <Snackbar
+              anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+              open={this.state.fieldMissing}
+              onRequestClose={() => {this.setState({fieldMissing: false})}}
+              SnackbarContentProps={{
+                'aria-describedby': 'message-id',
+              }}
+              message={<span id="message-id">Something is missing!</span>}
             />
           </div>
         }

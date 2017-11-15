@@ -19,10 +19,9 @@ const getLeaderboard = (req,res) => {
           data[i] = {
             name: user.name,
             total: sortedRecord[i].total,
-            quizPlay: sortedRecord[i].quizPlay
+            quizPlay: sortedRecord[i].quizPlay,
+            enrollment: sortedRecord[i].enrollment
           }
-          console.log(data[i]);
-          console.log("enrollment: " + sortedRecord[i].enrollment);
           asyncLoop(i+1, callback);
         })
       } else {

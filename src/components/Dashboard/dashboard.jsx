@@ -129,28 +129,17 @@ class Dashboard extends Component {
         {this.state.loading && <div><div className={classnames('loading m')}><CircularProgress size={80} /></div></div>}
         {!this.state.loading &&
           <div>
-            <Card style={{width: "95%",margin: "auto"}}>
-              <CardContent>
-                  <Line
-                  	data={this.state.chartData}
-                    height={260}
-                    options={{scales: {
-         yAxes: [{
-             ticks: {
-                 beginAtZero: true,
-                 userCallback: function(label, index, labels) {
-                     // when the floored value is the same as the value we have a whole number
-                     if (Math.floor(label) === label) {
-                         return label;
-                     }
-
-                 },
-             }
-         }],
-     },maintainAspectRatio: false}}
-                  />
-              </CardContent>
-            </Card>
+            <div style={{width: "95%",margin: "auto"}}>
+              <Card>
+                <CardContent>
+                    <Line
+                    	data={this.state.chartData}
+                      height={260}
+                      options={{maintainAspectRatio: false}}
+                    />
+                </CardContent>
+              </Card>
+            </div>
             <div style={{flexGrow: "1",width: "95%",margin: " 15px auto 15px auto"}}>
               <Grid container spacing={0}>
                   <Grid item md={3} xs={12} style={{...styles.inner,background:"#FF7043",borderBottom: "5px solid #BF360C"}}>

@@ -40,11 +40,12 @@ class Leaderboard extends Component {
     return(
       <div className="dash">
         {this.state.loading && <div><div className={classnames('loading m')}><CircularProgress size={80} /></div></div>}
-        {!this.state.loading && <Paper style={{width: "80%", margin: "auto"}}>
-          <Table style={{minWidth: "700px"}}>
+        {!this.state.loading && <Paper style={{width: "80%", margin: "auto", overflowX: "auto"}}>
+          <Table>
             <TableHead>
               <TableRow>
                 <TableCell numeric>Rank</TableCell>
+                <TableCell numeric>Enrollment</TableCell>
                 <TableCell numeric>Name</TableCell>
                 <TableCell numeric>Score</TableCell>
                 <TableCell numeric>Quiz Played</TableCell>
@@ -53,8 +54,9 @@ class Leaderboard extends Component {
             <TableBody>
               {this.state.stats.map((n,i) => {
                 return (
-                  <TableRow key={i}>
+                  <TableRow key={i} style={i===0?{background: "#1976D2", color: "white",fontWeight: "700"}:(i===1?{background: "#2196F3", color: "white",fontWeight: "700"}:(i===2?{background: "#64B5F6", color: "white",fontWeight: "700"}:{background: "#90CAF9",color: "black"}))}>
                     <TableCell numeric>{i+1}</TableCell>
+                    <TableCell numeric>{n.enrollment}</TableCell>
                     <TableCell numeric>{n.name}</TableCell>
                     <TableCell numeric>{n.total*10}</TableCell>
                     <TableCell numeric>{n.quizPlay}</TableCell>

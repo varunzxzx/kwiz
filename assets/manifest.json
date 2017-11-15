@@ -2,7 +2,7 @@
  "name": "KWIZ - Online Quiz Portal",
  "short_name": "KWIZ",
  "display": "standalone",
- "start_url": "./index.html",
+ "start_url": "/?utm_source=homescreen",
  "theme_color": "#3F51B5",
  "background_color": "#E8EAF6",
  "icons": [

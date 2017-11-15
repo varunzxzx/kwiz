@@ -69,7 +69,7 @@ class ButtonAppBar extends Component {
         <AppBar position="static">
           <Toolbar>
             <IconButton onClick={this.tDrawer} className={classes.menuButton} color="contrast" aria-label="Menu">
-              <div style={{border: "1px solid white",padding: "3px",borderRadius: "3px"}}>
+              <div style={{border: "1px solid white",padding: "3px",borderRadius: "3px",outline: "none"}}>
                 <MenuIcon/>
               </div>
               <Drawer toggleDrawer={this.tDrawer} open={this.state.open} raw={this.state.raw}/>

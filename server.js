@@ -27,7 +27,7 @@ if (process.env.NODE_ENV !== 'production') {
     app.use(logger('dev'));
     webpackDevHelper.useWebpackMiddleware(app)
 } else {
-    console.log('PRODUCTION ENVIRONMENT')
+    console.log('PRODUCTION ENVIRONMENT..')
     app.use('/js', express.static(__dirname + '/dist/js'))
 }
 

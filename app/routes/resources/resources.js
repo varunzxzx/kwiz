@@ -7,14 +7,17 @@ const getResources = (req, res) => {
   console.log("req.type: " + type);
   Stats.findOne({enrollment: req.decoded.enrollment},(err,stats) => {
     if(err) res.status(400).json({success: false,msg: "Not found!"});
-    Question.find({type: type}).limit(parseInt(stats[type].skip)).select('question op1 op2 op3 op4 crct').exec((err,question) => {
-      if(err) {
-        console.log("error");
-        res.status(401).json({success: false,msg: "Not found!"})
-      } else {
-        res.status(200).json(question);
-      }
-    });
+    if(stats[type].skip !== "0") {
+        Question.find({type: type}).limit(parseInt(stats[type].skip)).select('question op1 op2 op3 op4 crct').exec((err,question) => {
+            if(err) {
+                console.log("error");
+                return res.status(401).json({success: false,msg: "Not found!"})
+            } else {
+                return res.status(200).json(question);
+            }
+        });
+    }
+    return res.status(401).json({success: false,msg: "Not found!"})
   });
 };
 

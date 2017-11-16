@@ -3,7 +3,6 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
-
 const apiRoutes = require('./app/apiRoutes.js');
 
 /* Require .env */

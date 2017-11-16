@@ -7,6 +7,14 @@ import Card, { CardContent } from 'material-ui/Card';
 import {FormGroup, FormControlLabel} from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
 import Divider from 'material-ui/Divider';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
+import Button from 'material-ui/Button';
+import Slide from 'material-ui/transitions/Slide';
 
 class Resources extends Component {
   constructor(props) {
@@ -14,11 +22,18 @@ class Resources extends Component {
     this.state = {
       loading: false,
       questions: [],
-      type: ""
+      type: "",
+      notFound: false,
+      e: ""
     }
   }
 
+  handleRequestClose = () => {
+    this.setState({notFound: false});
+  }
+
   handleSubmit = (e) => {
+    this.setState({e})
     let arr;
     let str = "";
     let flag = false;
@@ -56,7 +71,7 @@ class Resources extends Component {
           thiss.setState({questions: response.data, loading: false});
         })
         .catch(function (error) {
-            thiss.setState({loading: false});
+            thiss.setState({notFound: true,loading: false});
             console.log("error");
         });
   }
@@ -70,7 +85,7 @@ class Resources extends Component {
           <CardContent>
             {this.state.questions.map((question,i) => {
               return(
-                <div style={{marginTop: "15px"}}>
+                <div style={{marginTop: "15px"}} key={i}>
                   Q{i+1}. {question.question}
                   <FormGroup style={{marginLeft: "24px"}}>
                     <FormControlLabel
@@ -116,6 +131,19 @@ class Resources extends Component {
             })}
           </CardContent>
         </Card>}
+        <Dialog open={this.state.notFound} transition={Slide} onRequestClose={this.handleRequestClose}>
+          <DialogTitle>{"Not Found"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              It seems you have not played any <em>{this.state.e}</em> quiz. It will unlock only when you play atleast one <em>{this.state.e}</em> quiz.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => {this.handleRequestClose()}} color="primary" raised>
+              OK
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     )
   }

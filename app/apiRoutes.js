@@ -15,6 +15,9 @@ const dashboard = require('./routes/dashboard/dashboard.js');
 const statistics = require('./routes/statistics/statistics.js');
 const resources = require('./routes/resources/resources.js');
 const leaderboard = require('./routes/leaderboard/leaderboard.js');
+const notification = require('./routes/notification/notification.js');
+const readNotification = require('./routes/notification/readNotification.js');
+const feedback = require('./routes/feedback/feedback.js');
 
 router.use(function (req, res, next) {
     try {
@@ -42,6 +45,9 @@ router.use(/\/((?!(addUser)|(authenticate)|(mailPage)|(addQuestion)|(register)|(
         res.status(400).json({success: false, msg: "Unauthorized Access"});
     }
 });
+router.get('/notification',notification);
+router.post('/notification',notification);
+router.post('/readNotification',readNotification);
 
 router.use('/getQuestion',(req, res, next) => {
   var type = req.headers['x-access-type'] || null;
@@ -64,6 +70,7 @@ router.post('/addQuestion',addQuestion);
 router.post('/submitAnswer',submitAnswer);
 router.post('/register',register);
 router.post('/authregister',authregister);
+router.post('/feedback',feedback);
 
 router.get('/dashboard',dashboard);
 router.get('/statistics',statistics);

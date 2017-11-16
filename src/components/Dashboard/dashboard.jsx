@@ -61,7 +61,6 @@ class Dashboard extends Component {
           let data = response.data.overall.map(data => {
             return data*10;
           });
-          console.log(data);
           let pieData = {
             labels: ['Basics', 'Classes & Inheritance', 'Function Overloading', 'Constructor & Destructor', 'Pointer', 'Array', 'Polymorphism'],
             datasets:[
@@ -120,7 +119,7 @@ class Dashboard extends Component {
         width: "60px",
         height: "60px",
         bottom: "60px",
-        right: "-220px",
+        right: "-74%",
         fillOpacity: "0.6"
       }
     }
@@ -142,7 +141,7 @@ class Dashboard extends Component {
             </div>
             <div style={{flexGrow: "1",width: "95%",margin: " 15px auto 15px auto"}}>
               <Grid container spacing={0}>
-                  <Grid item md={3} xs={12} style={{...styles.inner,background:"#FF7043",borderBottom: "5px solid #BF360C"}}>
+                  <Grid item md={3} sm={6} xs={12} style={{...styles.inner,background:"#FF7043",borderBottom: "5px solid #BF360C"}}>
                     <Typography type="headline" style={{marginBottom: "2px",fontSize: "30px"}} gutterBottom>
                       {this.state.rank}
                     </Typography>
@@ -151,7 +150,7 @@ class Dashboard extends Component {
                     </Typography>
                     <RankIcon style={{...styles.transparent,color: "#BF360C"}}/>
                   </Grid>
-                  <Grid item md={3} xs={12} style={{...styles.inner,background:"#9FA8DA",borderBottom: "5px solid #3949AB"}}>
+                  <Grid item md={3} sm={6} xs={12} style={{...styles.inner,background:"#9FA8DA",borderBottom: "5px solid #3949AB"}}>
                     <Typography type="headline" style={{marginBottom: "2px",fontSize: "30px"}} gutterBottom>
                       {this.state.average}%
                     </Typography>
@@ -160,7 +159,7 @@ class Dashboard extends Component {
                     </Typography>
                     <AverageIcon style={{...styles.transparent,color: "#3949AB"}}/>
                   </Grid>
-                  <Grid item md={3} xs={12} style={{...styles.inner,background:"#66BB6A",borderBottom: "5px solid #1B5E20"}}>
+                  <Grid item md={3} sm={6} xs={12} style={{...styles.inner,background:"#66BB6A",borderBottom: "5px solid #1B5E20"}}>
                     <Typography type="headline" style={{marginBottom: "2px",fontSize: "30px"}} gutterBottom>
                       {this.state.quesAttempt}
                     </Typography>
@@ -169,7 +168,7 @@ class Dashboard extends Component {
                     </Typography>
                     <FunctionIcon style={{...styles.transparent,color: "#1B5E20"}}/>
                   </Grid>
-                  <Grid item md={3} xs={12} style={{...styles.inner,background:"#FFC107",borderBottom: "5px solid #FF6F00"}}>
+                  <Grid item md={3} sm={6} xs={12} style={{...styles.inner,background:"#FFC107",borderBottom: "5px solid #FF6F00"}}>
                     <Typography type="headline" style={{marginBottom: "2px",fontSize: "30px"}} gutterBottom>
                       {this.state.quizPlay}
                     </Typography>

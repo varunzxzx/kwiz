@@ -17,7 +17,7 @@ const Notification = new Schema({
     date: {
         type: String
     },
-    expire_at: {type: Date, default: Date.now, expires: 604800},
+    expire_at: {type: Date, default: Date.now, expires: 604800000},
     readBy: [String]
 }, { collection: 'Notification' });
 

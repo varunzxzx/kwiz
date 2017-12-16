@@ -23,7 +23,7 @@ $ npm install
 ```
 #### To start a development server
 ```shell
-$ npm dev
+$ npm run dev
 ```
 
 #### To start a production server

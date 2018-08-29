@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 const apiRoutes = require('./app/apiRoutes.js');
+const compression = require('compression');
 
 /* Require .env */
 const dotenv = require('dotenv');
@@ -11,6 +12,8 @@ dotenv.config();
 dotenv.load();
 
 const port = process.env.PORT || 4000
+
+app.use(compression());
 
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "views/resetPassword"));

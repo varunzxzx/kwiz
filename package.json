@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "prestart": "np run build:prod",
+    "prestart": "npm run build:prod",
     "dev": "nodemon $NODE_DEBUG_OPTION server.js",
     "build:prod": "webpack --colors --display-error-details --config webpack.config.js -p && cp -r assets/* dist/",
     "test": "echo \"Error: no test specified\" && exit 1"

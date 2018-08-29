@@ -30,79 +30,79 @@ class sDrawer extends Component {
   }
 
   componentWillReceiveProps() {
-    this.setState({active: this.props.raw})
+    this.setState({ active: this.props.raw })
   }
 
   handleClick = (e) => {
-    this.setState({active: e});
+    this.setState({ active: e });
     this.props.toggleDrawer(e);
   }
   render() {
     const classes = this.props.classes;
-    return(
-      <Drawer open={this.props.open} width={250} onRequestClose={() => {this.props.toggleDrawer()}}>
-        <div className={classnames('logo')}><img src="uploads/logo.PNG" alt="KWIZ logo" title="KWIZ logo"/>  <span>KWIZ</span></div>
+    return (
+      <Drawer open={this.props.open} width={250} onRequestClose={() => { this.props.toggleDrawer() }}>
+        <div className={classnames('logo')}><img src="uploads/logo.PNG" alt="KWIZ logo" title="KWIZ logo" />  <span>KWIZ</span></div>
         <div tabIndex={0} role="button" className="mainList">
           <Divider />
-          <List className={classes.list} onClick={() => {this.handleClick('dashboard')}}>{
+          <List className={classes.list} onClick={() => { this.handleClick('dashboard') }}>{
             <ListItem button>
-              <ListItemIcon className={this.state.active=='dashboard'?classes.listItem:classes.listIte}>
+              <ListItemIcon className={this.state.active == 'dashboard' ? classes.listItem : classes.listIte}>
                 <DashboardIcon />
               </ListItemIcon>
-              <ListItemText className={this.state.active=='dashboard'?classnames('listText'):classnames('listTet')} primary="Dashboard" />
+              <ListItemText className={this.state.active == 'dashboard' ? classnames('listText') : classnames('listTet')} primary="Dashboard" />
             </ListItem>
           }</List>
-          <List className={classes.list} onClick={() => {this.handleClick('practice')}}>{
+          <List className={classes.list} onClick={() => { this.handleClick('practice') }}>{
             <ListItem button>
-              <ListItemIcon className={this.state.active=='practice'?classes.listItem:classes.listIte}>
+              <ListItemIcon className={this.state.active == 'practice' ? classes.listItem : classes.listIte}>
                 <PracticeIcon />
               </ListItemIcon>
-              <ListItemText className={this.state.active=='practice'?classnames('listText'):classnames('listTet')} primary="Practice"/>
+              <ListItemText className={this.state.active == 'practice' ? classnames('listText') : classnames('listTet')} primary="Practice" />
             </ListItem>
           }</List>
-          <List className={classes.list} onClick={() => {this.handleClick('contest')}}>{
+          <List className={classes.list} onClick={() => { this.handleClick('contest') }}>{
             <ListItem button>
-              <ListItemIcon className={this.state.active=='contest'?classes.listItem:classes.listIte}>
+              <ListItemIcon className={this.state.active == 'contest' ? classes.listItem : classes.listIte}>
                 <ContestIcon />
               </ListItemIcon>
-              <ListItemText className={this.state.active=='contest'?classnames('listText'):classnames('listTet')} primary="Contest"/>
+              <ListItemText className={this.state.active == 'contest' ? classnames('listText') : classnames('listTet')} primary="Contest" />
             </ListItem>
           }</List>
-          <List className={classes.list} onClick={() => {this.handleClick('statistics')}}>{
+          <List className={classes.list} onClick={() => { this.handleClick('statistics') }}>{
             <ListItem button>
-              <ListItemIcon className={this.state.active=='statistics'?classes.listItem:classes.listIte}>
+              <ListItemIcon className={this.state.active == 'statistics' ? classes.listItem : classes.listIte}>
                 <TimelineIcon />
               </ListItemIcon>
-              <ListItemText className={this.state.active=='statistics'?classnames('listText'):classnames('listTet')} primary="Statistics"/>
+              <ListItemText className={this.state.active == 'statistics' ? classnames('listText') : classnames('listTet')} primary="Statistics" />
             </ListItem>
           }</List>
-          <List className={classes.list} onClick={() => {this.handleClick('resources')}}>{
+          <List className={classes.list} onClick={() => { this.handleClick('resources') }}>{
             <ListItem button>
-              <ListItemIcon className={this.state.active=='resources'?classes.listItem:classes.listIte}>
+              <ListItemIcon className={this.state.active == 'resources' ? classes.listItem : classes.listIte}>
                 <ProfileIcon />
               </ListItemIcon>
-              <ListItemText className={this.state.active=='resources'?classnames('listText'):classnames('listTet')} primary="Resources"/>
+              <ListItemText className={this.state.active == 'resources' ? classnames('listText') : classnames('listTet')} primary="Resources" />
             </ListItem>
           }</List>
-          <List className={classes.list} onClick={() => {this.handleClick('leaderboard')}}>{
+          <List className={classes.list} onClick={() => { this.handleClick('leaderboard') }}>{
             <ListItem button>
-              <ListItemIcon className={this.state.active=='leaderboard'?classes.listItem:classes.listIte}>
+              <ListItemIcon className={this.state.active == 'leaderboard' ? classes.listItem : classes.listIte}>
                 <LeaderboardIcon />
               </ListItemIcon>
-              <ListItemText className={this.state.active=='leaderboard'?classnames('listText'):classnames('listTet')} primary="Leaderboard"/>
+              <ListItemText className={this.state.active == 'leaderboard' ? classnames('listText') : classnames('listTet')} primary="Leaderboard" />
             </ListItem>
           }</List>
-          <List className={classes.list} onClick={() => {this.handleClick('profile')}}>{
+          <List className={classes.list} onClick={() => { this.handleClick('profile') }}>{
             <ListItem button>
-              <ListItemIcon className={this.state.active=='profile'?classes.listItem:classes.listIte}>
+              <ListItemIcon className={this.state.active == 'profile' ? classes.listItem : classes.listIte}>
                 <ProfileIcon />
               </ListItemIcon>
-              <ListItemText className={this.state.active=='profile'?classnames('listText'):classnames('listTet')} primary="Profile"/>
+              <ListItemText className={this.state.active == 'profile' ? classnames('listText') : classnames('listTet')} primary="Profile" />
             </ListItem>
           }</List>
         </div>
         <Divider />
-        <div className="footer">Designed & Developed By <div><a href="http://www.mvarun.me" target="_blank">Varun</a></div></div>
+        <div className="footer">Designed & Developed By <div><a href="http://varunzxzx.github.io" target="_blank">Varun</a></div></div>
       </Drawer>
     )
   }
